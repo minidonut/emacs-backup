@@ -1,23 +1,23 @@
 
 ;; ----- smex-history -----
 (
- dired-do-rename
- profiler-stop
- profiler-report
- profiler-start
- transparency
- magit-diff-buffer-file
- tide-restart-server
+ package-delete
+ package-install
+ package-refresh-contents
+ load-file
+ neotree-hide
+ neotree
+ neotree-find
 )
 
 ;; ----- smex-data -----
 (
  (load-theme . 1)
- (load-file . 61)
- (package-install . 41)
+ (load-file . 62)
+ (package-install . 44)
  (counsel-M-x . 2)
  (counsel-mode . 2)
- (package-refresh-contents . 19)
+ (package-refresh-contents . 20)
  (flycheck-mode . 4)
  (all-the-icons-install-fonts . 1)
  (company-mode . 2)
@@ -31,14 +31,14 @@
  (package-autoremove . 5)
  (evil-goto-definition . 2)
  (find-function . 5)
- (package-delete . 3)
+ (package-delete . 4)
  (markdown-mode . 2)
  (revert-buffer . 1)
  (dired-ranger-copy . 9)
  (dired-ranger-paste . 11)
  (fold-this-regexp . 9)
  (tern-use-server . 14)
- (new-frame . 1)
+ (new-frame . 2)
  (company-complete . 1)
  (dired-ranger-bookmark . 5)
  (dired-ranger-bookmark-visit . 2)
@@ -71,7 +71,7 @@
  (set-mark-command . 1)
  (kill-region . 1)
  (rename-file . 3)
- (describe-mode . 1)
+ (describe-mode . 2)
  (string-rectangle . 2)
  (evil-insert . 1)
  (lao-compose-region . 1)
@@ -92,4 +92,11 @@
  (profiler-start . 1)
  (profiler-report . 1)
  (profiler-stop . 2)
+ (Info-mode-menu . 1)
+ (Info-mode . 2)
+ (lisp-mode . 1)
+ (neotree-dir . 3)
+ (neotree-find . 1)
+ (neotree . 1)
+ (neotree-hide . 1)
 )

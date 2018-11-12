@@ -1,0 +1,22 @@
+import React from "react";
+import {
+  Flex,
+  Box,
+  Text,
+  Image,
+} from "malta";
+
+export class MobileMain extends React.Component<any, any> {
+  public render() {
+    return (
+      <Flex flexDirection="column" alignItems="center">
+        <Box width="180px" height="180px" mt={4}>
+          <Image src="/static/images/img-signup-error.png" />
+        </Box>
+        <Text center mt={3} fontSize="h5">앗! 알 수 없는 문제가 발생했습니다.</Text>
+        <Text center fontSize="h5">알 수 없는 문제가 발생하여 세일즈부스트 개발팀이 열심히 수정 중에 있습니다.</Text>
+        <Text center fontSize="h5">문의사항이 있을 경우 카톡 플러스친구로 문의 주시면 최대한 빠르게 답변 도와드리겠습니다.</Text>
+      </Flex>
+    );
+  }
+}

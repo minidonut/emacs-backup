@@ -1,0 +1,21 @@
+import React from 'react';
+import styled from 'styled-components';
+import { Header } from "./Header";
+import Toast from "./Toast";
+
+const Container =  styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  min-height: 100vh;
+`;
+
+export const Layout = (props) => {
+  return (
+    <Container>
+      <Toast />
+      <Header />
+      {props.children}
+    </Container>
+  );
+};

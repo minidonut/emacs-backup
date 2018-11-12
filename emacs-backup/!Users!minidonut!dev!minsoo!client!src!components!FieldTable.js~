@@ -1,0 +1,48 @@
+import React from "react";
+import { Col, Row } from "./styled";
+import { Label } from "./Label";
+import { IconButton, Typography, Paper } from "@material-ui/core";
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+
+export class FieldTable extends React.Component {
+  render () {
+    const { title, data, row, selector, fns, renderButtons } = this.props;
+    return (
+        <Col mt={3}>
+          <Typography variant="title" style={{marginBottom: "16px"}}>{title}</Typography>
+          <Paper>
+            <Col py={1}>
+              { row.map((v,i) => {
+                const value = data[selector[i]];
+                return (
+                  <Row alignItems="center" my="4px" px={2} minHeight="40px" key={i}>
+                    <Typography variant="body1" style={{marginRight: "16px", minWidth:"90px"}}>{v}</Typography>
+                    <Label>{!value ? "--" : fns[i] ? fns[i](value) : value}</Label>
+                    {renderButtons[i] ? renderButtons[i]() : null}
+                  </Row>
+                );
+              })}
+            </Col>
+          </Paper>
+        </Col>
+    );
+  }
+}
+
+FieldTable.defaultProps = {
+  fns: [],
+  data: {},
+  row: [],
+  selector: [],
+  renderButtons: [],
+};
+
+/*
+title="TEACHER"
+data={this.state.teacher}
+row={["name", "contract type", "contract value"]}
+selector={["name", "contractType", "contractValue"]}
+fns={[undefined, x=>toDate(x), ...]}
+buttons = {[  ]}
+*/

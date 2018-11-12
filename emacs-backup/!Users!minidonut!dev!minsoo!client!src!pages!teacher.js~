@@ -1,0 +1,237 @@
+import React from 'react';
+import { Route } from "react-router-dom";
+import { BasicTable, Text, Row, Col, CreateCourseForm, Box, Picker, Fab, CreateForm } from "../components";
+import {
+  Icon, Button, Tooltip, List, ListItem, ListItemText,
+  TextField, Typography, CircularProgress,
+  Paper, IconButton, Divider,
+  Table, TableBody, TableCell, TableHead, TableRow, TableFooter,
+} from "@material-ui/core";
+import NumberFormat from 'react-number-format';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import AddIcon from '@material-ui/icons/Add';
+import axios from "axios";
+
+const Wrapper = ({children, ...props}) =>
+      <Col px={1} minHeight="calc(100vh - 60px)" {...props}>{children}</Col>;
+
+class Teacher extends React.Component {
+
+  componentDidMount(){
+    window.popup.info("teacher!");
+  }
+
+  handleClick = (id) => {
+    this.props.history.push(`/teacher/${id}/overview`);
+  }
+
+  render (){
+    return (
+      <Wrapper>
+        <BasicTable
+          handleClick={this.handleClick}
+          api="/get"
+          type="teacher"
+          omit={["createdAt", "updatedAt", "visible"]}
+        />
+        <Fab onClick={()=>{this.props.history.push("/teacher/create");}} type="student"/>
+      </Wrapper>
+    );
+  }
+};
+
+class Overview extends React.Component {
+
+  handleDelete = async () => {
+    const { id } = this.props.match.params;
+    try {
+      await axios.delete(`http://localhost:3030/api/v1/teacher/delete/${id}`);
+      this.props.history.push("/teacher");
+    }catch(error) {
+      alert(error.message);
+    }
+  }
+
+
+  render () {
+    return (
+      <Col width="700px" mx="auto">
+        <Col mt={4} width="min-content" mb={4}>
+          <Button color="secondary" variant="contained" onClick={this.handleDelete}>
+            delete
+          </Button>
+        </Col>
+      </Col>
+    );
+  }
+}
+
+class Invoice extends React.Component {
+
+  render(){
+    return (
+      <div>invoice</div>
+    );
+  }
+}
+
+
+class Create extends React.Component {
+
+  state = {
+    values: {
+      name: "",
+      phone: "",
+      contract: "",
+      contractType: "",
+      detail: "",
+    },
+    errors: {
+      name: null,
+      discount: null,
+    }
+  }
+
+  handleChange = (key) => {
+    return (e) => {
+      const value = e.target.value;
+      this.setState((prev) => {
+        return {
+          ...prev,
+          errors: {
+            name: null,
+            discount: null,
+          },
+          values: {
+            ...prev.values,
+            [key]: value,
+          },
+        };
+      });
+    };
+  }
+
+  generateError = (key, value) => {
+      this.setState((prev) => {
+        return {
+          ...prev,
+          errors: {
+            ...prev.errors,
+            [key]: value,
+          },
+        };
+      });
+  }
+
+  handleSubmit = async () => {
+    const { discount, name } = this.state.values;
+    let valid = true;
+    if(name === "") {
+      this.generateError("name", "Please enter the teacher's name");
+      valid = false;
+    }
+    if(parseInt(discount) < 0) {
+      this.generateError("discount", "Discount can't be negative");
+      valid = false;
+    }
+    if(!valid) {
+      return;
+    }else{
+      try {
+        await axios.post("http://localhost:3030/api/v1/teacher/create", this.state.values);
+        this.props.history.goBack();
+      }catch(error) {
+        alert(error.message);
+      }
+    }
+  }
+
+  render () {
+    const { name, detail, phone, contract, contractType } = this.state.values;
+    const { errors } = this.state;
+    return (
+      <Wrapper alignItems="center" mt={3}>
+        <CreateForm goBack={this.props.history.goBack} onSubmit={this.handleSubmit}>
+          <Box my={2}>
+            <Typography align="center" color="textPrimary" variant="headline">
+              Create new teacher
+            </Typography>
+          </Box>
+          <TextField
+            label="Name"
+            error={errors.name !== null}
+            value={name}
+            helperText={errors.name}
+            onChange={this.handleChange("name")} />
+          <TextField
+            style={{marginTop: "8px"}}
+            label="Phone number"
+            value={phone}
+            onChange={this.handleChange("phone")}
+            helperText={errors.price} />
+          <TextField
+            style={{marginTop: "8px"}}
+            label="Contract"
+            value={contract}
+            onChange={this.handleChange("contract")}
+            helperText={errors.price} />
+          <TextField
+            style={{marginTop: "8px"}}
+            label="Contract type"
+            value={contractType}
+            onChange={this.handleChange("contractType")}
+            helperText={errors.price} />
+          <TextField
+            style={{marginTop: "24px"}}
+            label="Descriptions"
+            value={detail}
+            onChange={this.handleChange("detail")}
+            multiline
+            variant="outlined"
+            rows="4"
+            margin="normal" />
+        </CreateForm>
+      </Wrapper>
+    );
+  }
+}
+
+const Sidebar = (props) => {
+  return(
+    <Col height="calc(100vh - 64px)" width="260px" bg="black._4" alignItems="center"
+         style={{borderLeft: "1px solid rgba(22,27,72, 0.5)", display: "block"}}>
+      <List component="nav">
+        <ListItem button onClick={()=> props.history.push("overview")}>
+          <ListItemText primary="Overview" />
+        </ListItem>
+        <Divider />
+        <ListItem button divider onClick={()=> props.history.push("invoice")}>
+          <ListItemText primary="Invoice" />
+        </ListItem>
+      </List>
+    </Col>
+  );
+};
+
+
+const Subpage = (props) => {
+  return (
+    <>
+      <Col width="calc(100vw - 260px)" alignItems="center" overflow="scroll" height="calc(100vh - 64px)" style={{display: "block"}}>
+        <Route exact path="/teacher/:id/overview" component={Overview} />
+      </Col>
+      <Sidebar {...props} />
+    </>
+  );
+};
+
+export const TeacherPage = (props) => {
+  return (
+    <Row width="100%" justifyContent="center">
+      <Route exact path="/teacher" component={Teacher}/>
+      <Route exact path="/teacher/create" component={Create}/>
+      <Route exact path="/teacher/:id/:page" component={Subpage} />
+    </Row>
+  );
+};

@@ -1,0 +1,3 @@
+export const generateLink = type => id => {
+  return `/${type}/${id}/overview`;
+};

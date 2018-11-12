@@ -33,7 +33,7 @@
     ("fe666e5ac37c2dfcf80074e88b9252c71a22b6f5d2f566df9a7aa4f9bea55ef8" "356e5cbe0874b444263f3e1f9fffd4ae4c82c1b07fe085ba26e2a6d332db34dd" default)))
  '(package-selected-packages
    (quote
-    (magit js2-refactor evil-textobj-anyblock doom-modeline company-tern fold-this dired-ranger nyan-mode markdown-mode company editorconfig expand-region neotree evil-surround ace-jump-mode rjsx-mode web-mode yasnippet evil golden-ratio beacon doom-themes tide counsel smex ivy ##))))
+    (treemacs-projectile treemacs-evil treemacs magit js2-refactor evil-textobj-anyblock doom-modeline company-tern fold-this dired-ranger nyan-mode markdown-mode company editorconfig expand-region evil-surround ace-jump-mode rjsx-mode web-mode yasnippet evil golden-ratio beacon doom-themes tide counsel smex ivy ##))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -51,7 +51,9 @@
 ;; Enable flashing mode-line on errors
 (doom-themes-visual-bell-config)
 ;; Enable custom neotree theme (all-the-icons must be installed!)
-(doom-themes-neotree-config)
+
+;;(doom-themes-neotree-config)
+
 ;; Corrects (and improves) org-mode's native fontification.
 (doom-themes-org-config)
 ;; 타이틀바 색깔 맞추는 스크립트
@@ -111,7 +113,6 @@
 (setq-default indent-tabs-mode nil)
 (setq tab-width 2)
 ;; Neo tree
-(global-set-key [f4] 'neotree-toggle)
 (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 (setq neo-smart-open t)
 

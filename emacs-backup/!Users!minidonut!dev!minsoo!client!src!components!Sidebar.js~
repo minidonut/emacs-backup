@@ -1,0 +1,19 @@
+
+import React from "react";
+import { Drawer, List } from "@material-ui/core";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link as Link,
+} from "react-router-dom";
+
+export class Sidebar extends React.Component {
+
+  render(){
+    return (
+      <Drawer variant="permanent">
+        <List>{["asd","def"]}</List>
+      </Drawer>
+    );
+  }
+}

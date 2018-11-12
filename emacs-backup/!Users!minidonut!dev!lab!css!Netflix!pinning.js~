@@ -1,0 +1,219 @@
+C.r("3d", function(e, t, i) {
+    "use strict";
+    var n = e("dW")
+      , s = e("fD")
+      , o = e("aZ")
+      , r = e("f5")
+      , a = e("9z")
+      , l = e("3a")
+      , c = e("oX")
+      , p = e("3i")
+      , h = e("p6")
+      , d = e("7s")
+      , S = e("ts")
+      , u = o({
+        displayName: "TabbedHeader",
+        contextTypes: {
+            routeHandler: n.object.isRequired
+        },
+        statics: {
+            SCROLL_STATE: {
+                PINNED: 0,
+                FLOATING: 1,
+                SUBHEADER_PINNED: 2,
+                UNDER_PREHEADER: 3
+            },
+            getPaths: function(e, t, i) {
+                return [].concat(l.getPaths(e, t, i), p.getPaths(e, t, i));
+            }
+        },
+        getInitialState: function() {
+            return this.scope = {
+                mainHeader: null,
+                mainHeaderHeight: null,
+                mainHeaderScrollWidth: null,
+                subheader: null,
+                pinningHeader: null,
+                mouseOverTimeout: null,
+                lastScrollTop: 0,
+                inAnimation: !1,
+                scrollState: u.SCROLL_STATE.UNDER_PREHEADER
+            },
+            {};
+        },
+        shouldComponentUpdate: S.pureRender,
+        getRevealStartTop: function() {
+            return this.scope.scrollState === u.SCROLL_STATE.SUBHEADER_PINNED && this.scope.pinningHeader ? this.scope.pinningHeader.style.top : this.getPinningHeaderTop() - d.getScrollTop() + "px";
+        },
+        revealHeader: function() {
+            var e = this;
+            this.scope.mouseOverTimeout = null,
+            this.scope.scrollState !== u.SCROLL_STATE.PINNED && this.scope.scrollState !== u.SCROLL_STATE.UNDER_PREHEADER && h.animateIt(this.scope.pinningHeader, [{
+                position: "fixed",
+                top: this.getRevealStartTop()
+            }, {
+                position: "fixed",
+                top: 0
+            }], {
+                duration: 100
+            }, function() {
+                e.scope.pinningHeader && (e.scope.pinningHeader.style.transitionDuration = 0),
+                e.setScrollState(u.SCROLL_STATE.PINNED, 0);
+            });
+        },
+        delayedRevealHeader: function() {
+            this.clearHeaderRevealTimeout(),
+            this.scope.mouseOverTimeout = setTimeout(this.revealHeader, 100);
+        },
+        clearHeaderRevealTimeout: function() {
+            this.scope.mouseOverTimeout && (clearTimeout(this.scope.mouseOverTimeout),
+            this.scope.mouseOverTimeout = null);
+        },
+        getBackgroundColor: function(e) {
+            switch (e) {
+            case u.SCROLL_STATE.UNDER_PREHEADER:
+                return "transparent";
+            default:
+                return "rgb(20, 20, 20)";
+            }
+        },
+        getCSSPosition: function(e) {
+            switch (e) {
+            case u.SCROLL_STATE.UNDER_PREHEADER:
+                return "relative";
+            case u.SCROLL_STATE.FLOATING:
+                return "absolute";
+            default:
+                return "fixed";
+            }
+        },
+        getAnimationStartColor: function(e) {
+            switch (e) {
+            case u.SCROLL_STATE.UNDER_PREHEADER:
+                return "rgb(20, 20, 20)";
+            case u.SCROLL_STATE.PINNED:
+            case u.SCROLL_STATE.SUBHEADER_PINNED:
+                return "transparent";
+            default:
+                return "rgb(20, 20, 20)";
+            }
+        },
+        animateHeaderBackground: function(e) {
+            var t = this;
+            if (!this.scope.inAnimation) {
+                var i = this.getAnimationStartColor(e)
+                  , n = this.getBackgroundColor(e);
+                this.scope.inAnimation = !0,
+                this.scope.pinningHeader && h.animateIt(this.scope.pinningHeader, [{
+                    background: i
+                }, {
+                    background: n
+                }], {
+                    duration: 500
+                }, function() {
+                    t.scope.pinningHeader && (t.scope.pinningHeader.style.transitionDuration = 0,
+                    t.scope.pinningHeader.style.background = t.getBackgroundColor(t.scope.scrollState)),
+                    t.scope.inAnimation = !1;
+                });
+            }
+        },
+        setScrollState: function(e, t) {
+            var i = this;
+            requestAnimationFrame(function() {
+                i.scope.pinningHeader && (i.scope.pinningHeader.style.top = t + "px",
+                i.scope.pinningHeader.style.position = i.getCSSPosition(e)),
+                i.getBackgroundColor(e) !== (i.scope.pinningHeader.style.background || "transparent") && i.animateHeaderBackground(e),
+                i.scope.scrollState = e;
+            });
+        },
+        getPinningHeaderTop: function() {
+            return parseInt(this.scope.pinningHeader.style.top, 10);
+        },
+        getMainHeaderHeight: function() {
+            var e = this.scope.mainHeader && this.scope.mainHeader.scrollWidth;
+            return this.scope.mainHeaderHeight && e === this.scope.mainHeaderScrollWidth || (this.scope.mainHeaderScrollWidth = e,
+            this.scope.mainHeaderHeight = this.scope.mainHeader.getBoundingClientRect().height),
+            this.scope.mainHeaderHeight;
+        },
+        pinOnScroll: function() {
+            var e = d.getScrollTop();
+            if (e - this.scope.lastScrollTop > 0) {
+                if (this.scope.scrollState === u.SCROLL_STATE.UNDER_PREHEADER && e > this.props.getPreHeaderHeight())
+                    p.hasSubHeader(this.context.routeHandler) ? this.setScrollState(u.SCROLL_STATE.FLOATING, e) : this.setScrollState(u.SCROLL_STATE.PINNED, 0);
+                else if (this.scope.scrollState === u.SCROLL_STATE.PINNED && p.hasSubHeader(this.context.routeHandler))
+                    this.setScrollState(u.SCROLL_STATE.FLOATING, e);
+                else if (this.scope.scrollState === u.SCROLL_STATE.FLOATING) {
+                    var t = this.getMainHeaderHeight();
+                    e - this.getPinningHeaderTop() > t && this.setScrollState(u.SCROLL_STATE.SUBHEADER_PINNED, -t);
+                }
+            } else
+                e <= this.props.getPreHeaderHeight() ? this.setScrollState(u.SCROLL_STATE.UNDER_PREHEADER, 0) : this.scope.scrollState === u.SCROLL_STATE.SUBHEADER_PINNED ? this.setScrollState(u.SCROLL_STATE.FLOATING, e + this.getPinningHeaderTop()) : this.scope.scrollState === u.SCROLL_STATE.FLOATING && this.getPinningHeaderTop() >= e && this.setScrollState(u.SCROLL_STATE.PINNED, 0);
+            this.scope.lastScrollTop = e;
+        },
+        enablePinning: function() {
+            this.disablePinning(),
+            window.addEventListener("scroll", this.pinOnScroll, {
+                passive: !0
+            });
+        },
+        disablePinning: function() {
+            window.removeEventListener("scroll", this.pinOnScroll, {
+                passive: !0
+            });
+        },
+        resetPinning: function() {
+            d.getScrollTop() > this.props.getPreHeaderHeight() ? this.setScrollState(u.SCROLL_STATE.PINNED, 0) : this.setScrollState(u.SCROLL_STATE.UNDER_PREHEADER, 0),
+            this.enablePinning();
+        },
+        componentDidUpdate: function() {
+            this.resetPinning();
+        },
+        componentDidMount: function() {
+            this.resetPinning();
+        },
+        componentWillUnmount: function() {
+            this.disablePinning();
+        },
+        hasBillboard: function() {
+            var e = this.context.routeHandler.route;
+            return !this.props.isShowingProfilesGate && -1 !== [c.home, c.browse].indexOf(e) && this.props.isShowingBillboard;
+        },
+        setPinningHeaderRef: function(e) {
+            this.scope.pinningHeader = e;
+        },
+        setMainHeaderRef: function(e) {
+            this.scope.mainHeader = e ? r.findDOMNode(e) : e;
+        },
+        setSubHeaderRef: function(e) {
+            this.scope.subheader = e ? r.findDOMNode(e) : e;
+        },
+        render: function() {
+            return s.createElement("div", {
+                className: a("pinning-header", {
+                    hide: this.props.hideHeader,
+                    "on-profiles-gate": this.props.isShowingProfilesGate
+                })
+            }, s.createElement("div", {
+                className: "pinning-header-container",
+                ref: this.setPinningHeaderRef
+            }, s.createElement(l, {
+                pathEvaluator: this.props.pathEvaluator,
+                model: this.props.model,
+                term: this.props.term,
+                showDVDLink: this.props.showDVDLink,
+                isShowingProfilesGate: this.props.isShowingProfilesGate,
+                isSolid: this.props.isSolid,
+                hasSignOut: this.props.hasSignOut,
+                hasBillboard: this.hasBillboard(),
+                getPreHeaderHeight: this.props.getPreHeaderHeight,
+                ref: this.setMainHeaderRef
+            }), !this.props.isShowingProfilesGate && s.createElement(p, {
+                pathEvaluator: this.props.pathEvaluator,
+                onAROHeaderMouseMove: this.delayedRevealHeader,
+                onAROHeaderMouseOut: this.clearHeaderRevealTimeout,
+                ref: this.setSubHeaderRef
+            })));
+        }
+    });
+    t.exports = u;
+});

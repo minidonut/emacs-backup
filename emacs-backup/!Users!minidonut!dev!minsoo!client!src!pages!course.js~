@@ -1,0 +1,436 @@
+import React from "react";
+import { Route } from "react-router-dom";
+import { Text, Row, CustomTable, Col, CreateCourseForm, Box, Picker } from "../components";
+import {
+  Icon, Button, Tooltip,
+  TextField, Typography, CircularProgress,
+  Paper, IconButton, Divider,
+  Table, TableBody, TableCell, TableHead, TableRow, TableFooter,
+} from "@material-ui/core";
+import NumberFormat from 'react-number-format';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import AddIcon from '@material-ui/icons/Add';
+
+
+const Wrapper = ({children, ...props}) =>
+      <Col px={1} minHeight="calc(100vh - 60px)" {...props}>{children}</Col>;
+
+const Fab = (props) =>
+      <Tooltip title="Create new course">
+        <Button variant="fab"
+                color="primary"
+                aria-label="Add"
+                onClick={props.onClick}
+                style={{position: "fixed", right: "32px", bottom: "32px"}}>
+          <Icon>add</Icon>
+        </Button>
+      </Tooltip>;
+
+
+export class Course extends React.Component {
+
+  componentDidMount(){
+    window.popup.info("course!");
+  }
+
+  handleClick = (id) => {
+    this.props.history.push(`/course/${id}/overview`);
+  }
+
+  render (){
+    return (
+      <Wrapper>
+        <CustomTable handleClick={this.handleClick} />
+        <Fab onClick={()=>{this.props.history.push("/course/new");}}/>
+      </Wrapper>
+    );
+  }
+};
+
+function NumberFormatCustom(props) {
+  const { inputRef, onChange, ...other } = props;
+
+  return (
+    <NumberFormat
+      {...other}
+      getInputRef={inputRef}
+      onValueChange={values => {
+        onChange({
+          target: {
+            value: values.value,
+          },
+        });
+      }}
+      thousandSeparator
+      prefix="₩"
+    />
+  );
+}
+
+export class Overview extends React.Component {
+
+  render () {
+    return (
+      <div>Overview</div>
+    );
+  }
+}
+
+export class Schedule extends React.Component {
+
+  render () {
+    return (
+      <div>Schedule</div>
+    );
+  }
+}
+
+// DUMMY
+const props = {
+  edit: {
+    name: "English 101",
+    price: "50000"
+  }
+};
+
+export class Edit extends React.Component {
+
+  state = {
+    values: {
+      name: "English 101",
+      price: "50000",
+      detail: "",
+    },
+    errors: {
+      name: null,
+      price: null,
+    },
+    button: {
+      name: 0,
+      price: 0,
+    }
+  }
+
+  handleChange = (key) => {
+    return (e) => {
+      const value = e.target.value;
+      this.setState((prev) => {
+        return {
+          ...prev,
+          errors: {
+            name: null,
+            price: null,
+          },
+          values: {
+            ...prev.values,
+            [key]: value,
+          },
+        };
+      });
+    };
+  }
+
+  handlePickStudent = (student) => {
+    alert(student);
+  }
+
+  generateError = (key, value) => {
+      this.setState((prev) => {
+        return {
+          ...prev,
+          errors: {
+            ...prev.errors,
+            [key]: value,
+          },
+        };
+    });
+  }
+
+  changeButtonState = (key, value) => {
+      this.setState((prev) => {
+        return {
+          ...prev,
+          button: {
+            ...prev.button,
+            [key]: value,
+          }};});}
+
+  handleSubmit = (type) => (event) => {
+    const { name, price } = this.state.values;
+    switch (type) {
+    case "name":
+      if (name.length <= 4){ // 유효한 클래스 이름인지 검사하는 부분. 나중에 추가 TODO
+        this.generateError("name", "Course name must be longer than a word");
+        return;  // 즉시 리턴해서 진행을 차단
+      }
+      break;
+    case "price":
+      if(parseInt(price) <= 0 || price === "") {
+        this.generateError("price", "Price must be a positive integer");
+        return;  // 즉시 리턴해서 진행을 차단
+      }
+      break;
+    default:
+      break;
+    }
+
+    // 실제로 API콜이 보내져야하는 부분
+    this.changeButtonState(type, 1);
+    /*global setTimeout*/
+    setTimeout(()=> {this.changeButtonState(type, 2);}, 1500);
+  }
+
+  render () {
+    const { price, name, detail } = this.state.values;
+    const { errors } = this.state;
+    return (
+      <Col width="700px" alignSelf="center" mt={3}>
+        <Col mt={3}>
+          <Typography variant="title" style={{marginBottom: "16px"}}>BASIC</Typography>
+          <Paper>
+            <Col p={2}>
+              <Row alignItems="center">
+              <TextField
+                  label="Name"
+                  error={errors.name !== null}
+                  value={name}
+                  helperText={errors.name}
+                  style={{marginRight: "16px", minWidth: "220px"}}
+                  onChange={this.handleChange("name")} />
+                { this.state.values.name === props.edit.name ? null
+                  : this.state.button.name === 1 ? <CircularProgress size={25} style={{marginLeft: "32px"}} />
+                  : <Button size="medium"
+                            onClick={this.handleSubmit("name")}
+                            style={{color: this.state.button.name === 2 ? "#23C1A6" : "rgba(68, 72, 223, 0.9)"}}>
+                      {this.state.button.name === 2 ? "SAVED" : "SAVE"}
+                      <Icon style={{fonrSize: "12px", marginLeft:"8px"}}>
+                      {this.state.button.name === 2 ? "done" : "save"}
+                      </Icon>
+                    </Button>}
+              </Row>
+              <Row mt={2} alignItems="center">
+                <TextField
+                  label="Price"
+                  error={errors.price !== null}
+                  value={price}
+                  onChange={this.handleChange("price")}
+                  helperText={errors.price}
+                  style={{marginRight: "16px", minWidth: "220px"}}
+                  InputProps={{inputComponent: NumberFormatCustom}} />
+                { this.state.values.price === props.edit.price ? null
+                  : this.state.button.price === 1 ? <CircularProgress size={25} style={{marginLeft: "32px"}} />
+                  : <Button size="medium"
+                            onClick={this.handleSubmit("price")}
+                            style={{color: this.state.button.price === 2 ? "#23C1A6" : "rgba(68, 72, 223, 0.9)"}}>
+                      {this.state.button.price === 2 ? "SAVED" : "SAVE"}
+                      <Icon style={{fonrSize: "12px", marginLeft:"8px"}}>
+                      {this.state.button.price === 2 ? "done" : "save"}
+                      </Icon>
+                    </Button>}
+              </Row>
+            </Col>
+          </Paper>
+        </Col>
+        <Col mt={3}>
+          <Typography variant="title" style={{marginBottom: "16px"}}>TEACHER</Typography>
+          <Paper>
+            <Col p={2}>
+              <Row alignItems="center">
+                <Typography variant="body1" style={{marginRight: "16px", minWidth:"90px"}}>name</Typography>
+                <Button>Saehun Chung</Button>
+                <IconButton aria-label="Edit" style={{marginLeft: "auto", color: "#23C1A6"}}>
+                  <EditIcon fontSize="small" />
+                </IconButton>
+                <IconButton aria-label="Delete" style={{color: "#F51A1A"}}>
+                  <DeleteIcon fontSize="small" />
+                </IconButton>
+              </Row>
+              <Row alignItems="center" mt={1}>
+                <Typography variant="body1" style={{marginRight: "16px", minWidth:"90px"}}>contract type</Typography>
+                <Button>percentage</Button>
+                <IconButton aria-label="Edit" style={{marginLeft: "auto", color: "#23C1A6"}}>
+                  <EditIcon fontSize="small" />
+                </IconButton>
+                <IconButton aria-label="Delete" style={{cursor: "not-allowed", color: "rgba(22,27,72, 0.1)"}}>
+                  <DeleteIcon fontSize="small" />
+                </IconButton>
+              </Row>
+              <Row alignItems="center" mt={1}>
+                <Typography variant="body1" style={{marginRight: "16px", minWidth:"90px"}}>contract value</Typography>
+                <Button>50 %</Button>
+                <IconButton aria-label="Edit" style={{marginLeft: "auto", color: "#23C1A6"}}>
+                  <EditIcon fontSize="small" />
+                </IconButton>
+                <IconButton aria-label="Delete" style={{cursor: "not-allowed", color: "rgba(22,27,72, 0.1)"}}>
+                  <DeleteIcon fontSize="small" />
+                </IconButton>
+              </Row>
+            </Col>
+          </Paper>
+        </Col>
+        <Col mt={3}>
+          <Typography variant="title" style={{marginBottom: "16px"}}>STUDENT</Typography>
+          <Paper>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell padding="none" style={{paddingLeft: "16px"}}>ID</TableCell>
+                  <TableCell>NAME</TableCell>
+                  <TableCell>DISCOUNT</TableCell>
+                  <TableCell>DISCOUNT REASON</TableCell>
+                  <TableCell padding="none" style={{textAlign: "center"}}>EDIT</TableCell>
+                  <TableCell padding="none" style={{paddingRight: "16px", textAlign: "center"}}>DELETE</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  <TableCell padding="none" style={{paddingLeft: "16px"}}>3</TableCell>
+                  <TableCell>Karl</TableCell>
+                  <TableCell>10%</TableCell>
+                  <TableCell>--</TableCell>
+                  <TableCell padding="none" style={{textAlign: "center"}}>
+                    <IconButton aria-label="Edit" style={{marginLeft: "auto", color: "#23C1A6"}}>
+                      <EditIcon fontSize="small" />
+                    </IconButton>
+                  </TableCell>
+                  <TableCell padding="none" style={{paddingRight: "16px", textAlign: "center"}}>
+                    <IconButton aria-label="Delete" style={{color: "#F51A1A"}}>
+                      <DeleteIcon fontSize="small" />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+            <Picker
+              onClose={this.handlePickStudent}
+              component={(props) =>
+                  <Row
+                    onClick={props.onClick}
+                    alignItems="center"
+                    justifyContent="center"
+                    cursor="pointer"
+                    hoverBg="black._4"
+                    height="48px">
+                    <AddIcon fontSize="small" style={{color: "rgba(68,72,223, 0.8)"}} />
+                    <Text ml={2} color="blue.royal" fontSize="h5">ADD STUDENT</Text>
+                  </Row>
+              }/>
+          </Paper>
+        </Col>
+      </Col>
+    );
+  }
+}
+
+export class Create extends React.Component {
+
+  state = {
+    values: {
+      name: "",
+      price: "",
+      detail: "",
+    },
+    errors: {
+      name: null,
+      price: null,
+    }
+  }
+
+  handleChange = (key) => {
+    return (e) => {
+      const value = e.target.value;
+      this.setState((prev) => {
+        return {
+          ...prev,
+          errors: {
+            name: null,
+            price: null,
+          },
+          values: {
+            ...prev.values,
+            [key]: value,
+          },
+        };
+      });
+    };
+  }
+
+  generateError = (key, value) => {
+      this.setState((prev) => {
+        return {
+          ...prev,
+          errors: {
+            ...prev.errors,
+            [key]: value,
+          },
+        };
+      });
+  }
+
+  handleSubmit = () => {
+    const { price, name } = this.state.values;
+    let valid = true;
+    if(name === "") {
+      this.generateError("name", "Please enter the name of the course");
+      valid = false;
+    }
+    if(parseInt(price) <= 0) {
+      this.generateError("price", "Price must be a positive integer");
+      valid = false;
+    }
+
+    if(!valid) {
+      return;
+    }
+  }
+
+  render () {
+    const { price, name, detail } = this.state.values;
+    const { errors } = this.state;
+    return (
+      <Wrapper alignItems="center" mt={3}>
+        <CreateCourseForm goBack={this.props.history.goBack} onSubmit={this.handleSubmit}>
+          <Box my={2}>
+            <Typography align="center" color="textPrimary" variant="headline">
+              Create new course
+            </Typography>
+          </Box>
+          <TextField
+            label="Name"
+            error={errors.name !== null}
+            value={name}
+            helperText={errors.name}
+            onChange={this.handleChange("name")} />
+          <TextField
+            style={{marginTop: "8px"}}
+            label="Price"
+            error={errors.price !== null}
+            value={price}
+            onChange={this.handleChange("price")}
+            helperText={errors.price}
+            InputProps={{inputComponent: NumberFormatCustom}} />
+          <TextField
+            style={{marginTop: "24px"}}
+            label="Descriptions"
+            value={detail}
+            onChange={this.handleChange("detail")}
+            multiline
+            variant="outlined"
+            rows="4"
+            margin="normal" />
+        </CreateCourseForm>
+      </Wrapper>
+    );
+  }
+}
+
+export const CoursePage = (props) => {
+  return (<>
+    <Route exact path="/course" component={Course} />
+    <Route exact path="/course/new" component={Create} />
+    <Route exact path="/course/:id/overview" component={Overview} />
+    <Route exact path="/course/:id/schedule" component={Schedule} />
+    <Route exact path="/course/:id/edit" component={Edit} />
+  </>);
+};
