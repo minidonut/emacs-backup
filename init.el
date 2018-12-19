@@ -30,10 +30,10 @@
  '(counsel-mode t)
  '(custom-safe-themes
    (quote
-    ("fe666e5ac37c2dfcf80074e88b9252c71a22b6f5d2f566df9a7aa4f9bea55ef8" "356e5cbe0874b444263f3e1f9fffd4ae4c82c1b07fe085ba26e2a6d332db34dd" default)))
+    ("b54826e5d9978d59f9e0a169bbd4739dd927eead3ef65f56786621b53c031a7c" "fe666e5ac37c2dfcf80074e88b9252c71a22b6f5d2f566df9a7aa4f9bea55ef8" "356e5cbe0874b444263f3e1f9fffd4ae4c82c1b07fe085ba26e2a6d332db34dd" default)))
  '(package-selected-packages
    (quote
-    (treemacs-projectile treemacs-evil treemacs magit js2-refactor evil-textobj-anyblock doom-modeline company-tern fold-this dired-ranger nyan-mode markdown-mode company editorconfig expand-region evil-surround ace-jump-mode rjsx-mode web-mode yasnippet evil golden-ratio beacon doom-themes tide counsel smex ivy ##))))
+    (yaml-mode graphql-mode tabbar treemacs-projectile treemacs-evil treemacs magit js2-refactor evil-textobj-anyblock doom-modeline company-tern fold-this dired-ranger nyan-mode markdown-mode company editorconfig expand-region evil-surround ace-jump-mode rjsx-mode web-mode yasnippet evil golden-ratio beacon doom-themes tide counsel smex ivy ##))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -367,3 +367,39 @@ Version 2018-02-21"
 
 (define-key evil-inner-text-objects-map "b" 'evil-textobj-anyblock-inner-block)
 (define-key evil-outer-text-objects-map "b" 'evil-textobj-anyblock-a-block)
+
+(defun revert-buffer-no-confirm ()
+  "Revert buffer without confirmation."
+  (interactive) (revert-buffer t t))
+(global-set-key (kbd "C-s-r")  'revert-buffer-no-confirm)
+
+
+;; RJSX configures
+(add-hook 'rjsx-mode-hook
+          (lambda ()
+            (setq indent-tabs-mode nil) ;;Use space instead of tab
+            (setq js-indent-level 2) ;;space width is 2 (default is 4)
+            (setq js2-strict-missing-semi-warning nil))) ;;disable the semicolon warning
+
+;; web-mode setting
+(setq web-mode-enable-auto-quoting nil)
+
+
+;; (setq web-mode-enable-current-element-highlight t)
+;; (setq web-mode-enable-current-column-highlight t)
+
+
+(require 'web-mode)
+(define-key web-mode-map (kbd "C-c C-a") 'web-mode-attribute-select)
+(define-key web-mode-map (kbd "C-c C-c") 'web-mode-element-content-select)
+(define-key web-mode-map (kbd "C-c C-t") 'web-mode-tag-select)
+(define-key web-mode-map (kbd "C-c C-e") 'web-mode-element-select)
+(define-key web-mode-map (kbd "C-c C-w") 'web-mode-tag-end)
+
+
+;; TABbar mode configure
+(tabbar-mode 1)
+(define-key global-map (kbd "s-{") 'tabbar-backward-tab)
+(define-key global-map (kbd "s-}") 'tabbar-forward-tab)
+(define-key global-map (kbd "C-s-{") 'tabbar-backward-group)
+(define-key global-map (kbd "C-s-}") 'tabbar-forward-group)

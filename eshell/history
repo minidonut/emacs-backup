@@ -1,0 +1,14 @@
+ls
+ls -al
+cd ../
+cd ../../
+ls
+cd ../
+ls
+ls -al
+echo $PATH
+exit
+ls
+exit
+ls
+exit
