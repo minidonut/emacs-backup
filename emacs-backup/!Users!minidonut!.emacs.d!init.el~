@@ -30,11 +30,10 @@
  '(counsel-mode t)
  '(custom-safe-themes
    (quote
-    ("214f27cdf7c81ef19cce84ca4226196c0f50cb759e83bf21906dfe587528c078" default)))
+    ("75d3dde259ce79660bac8e9e237b55674b910b470f313cdf4b019230d01a982a" "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "ecba61c2239fbef776a72b65295b88e5534e458dfe3e6d7d9f9cb353448a569e" "cd736a63aa586be066d5a1f0e51179239fe70e16a9f18991f6f5d99732cabb32" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "6b289bab28a7e511f9c54496be647dc60f5bd8f9917c9495978762b99d8c96a0" "b54826e5d9978d59f9e0a169bbd4739dd927eead3ef65f56786621b53c031a7c" "fe666e5ac37c2dfcf80074e88b9252c71a22b6f5d2f566df9a7aa4f9bea55ef8" "356e5cbe0874b444263f3e1f9fffd4ae4c82c1b07fe085ba26e2a6d332db34dd" default)))
  '(package-selected-packages
    (quote
-    (magit js2-refactor evil-textobj-anyblock doom-modeline company-tern fold-this dired-ranger nyan-mode markdown-mode company editorconfig expand-region neotree evil-surround ace-jump-mode rjsx-mode web-mode yasnippet evil golden-ratio beacon doom-themes tide counsel smex ivy ##)))
- '(tabbar-mode t nil (tabbar)))
+    (autopair yaml-mode graphql-mode tabbar treemacs-projectile treemacs-evil treemacs magit js2-refactor evil-textobj-anyblock doom-modeline company-tern fold-this dired-ranger nyan-mode markdown-mode company editorconfig expand-region evil-surround ace-jump-mode rjsx-mode web-mode yasnippet evil golden-ratio beacon doom-themes tide counsel smex ivy ##))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -52,7 +51,9 @@
 ;; Enable flashing mode-line on errors
 (doom-themes-visual-bell-config)
 ;; Enable custom neotree theme (all-the-icons must be installed!)
-(doom-themes-neotree-config)
+
+;;(doom-themes-neotree-config)
+
 ;; Corrects (and improves) org-mode's native fontification.
 (doom-themes-org-config)
 ;; 타이틀바 색깔 맞추는 스크립트
@@ -112,7 +113,6 @@
 (setq-default indent-tabs-mode nil)
 (setq tab-width 2)
 ;; Neo tree
-(global-set-key [f4] 'neotree-toggle)
 (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 (setq neo-smart-open t)
 
@@ -367,3 +367,42 @@ Version 2018-02-21"
 
 (define-key evil-inner-text-objects-map "b" 'evil-textobj-anyblock-inner-block)
 (define-key evil-outer-text-objects-map "b" 'evil-textobj-anyblock-a-block)
+
+(defun revert-buffer-no-confirm ()
+  "Revert buffer without confirmation."
+  (interactive) (revert-buffer t t))
+(global-set-key (kbd "C-s-r")  'revert-buffer-no-confirm)
+
+
+;; RJSX configures
+(add-hook 'rjsx-mode-hook
+          (lambda ()
+            (setq indent-tabs-mode nil) ;;Use space instead of tab
+            (setq js-indent-level 2) ;;space width is 2 (default is 4)
+            (setq js2-strict-missing-semi-warning nil))) ;;disable the semicolon warning
+
+;; web-mode setting
+(setq web-mode-enable-auto-quoting nil)
+
+
+;; (setq web-mode-enable-current-element-highlight t)
+;; (setq web-mode-enable-current-column-highlight t)
+
+
+(require 'web-mode)
+(define-key web-mode-map (kbd "C-c C-a") 'web-mode-attribute-select)
+(define-key web-mode-map (kbd "C-c C-c") 'web-mode-element-content-select)
+(define-key web-mode-map (kbd "C-c C-t") 'web-mode-tag-select)
+(define-key web-mode-map (kbd "C-c C-e") 'web-mode-element-select)
+(define-key web-mode-map (kbd "C-c C-w") 'web-mode-tag-end)
+(define-key web-mode-map (kbd "C-c C-r") 'web-mode-element-rename)
+
+
+;; TABbar mode configure
+(tabbar-mode 1)
+(define-key global-map (kbd "s-{") 'tabbar-backward-tab)
+(define-key global-map (kbd "s-}") 'tabbar-forward-tab)
+(define-key global-map (kbd "C-s-{") 'tabbar-backward-group)
+(define-key global-map (kbd "C-s-}") 'tabbar-forward-group)
+
+
