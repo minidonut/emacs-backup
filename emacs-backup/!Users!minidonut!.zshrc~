@@ -2,13 +2,12 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export NODE_ENV=“development”
 export PATH=/usr/local/bin:$PATH
-export PATH=/usr/local/share/npm/bin:$PATH
-export PATH=/Users/minidonut/dev/bin:$PATH
-export PATH="\$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+export PATH=/Users/minidonut/bin:$PATH
+export PATH=/Users/minidonut/.local/bin
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/minidonut/.oh-my-zsh"
-ZSH_THEME=avit
+ZSH_THEME=aussiegeek
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -68,7 +67,8 @@ ZSH_THEME=avit
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git
+  git,
+  zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -109,3 +109,8 @@ alias gs="git status"
 alias gc="git checkout"
 alias gcb="git checkout -b"
 alias gp="git push"
+alias build="yarn build && yarn lint"
+alias em="emacsclient -nw"
+
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

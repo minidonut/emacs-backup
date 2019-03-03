@@ -1,24 +1,24 @@
 
 ;; ----- smex-history -----
 (
- package-install
- package-refresh-contents
- package-delete
- load-theme
  load-file
- indent-region
- rename-file
+ lsp
+ haskell-hoogle
+ lsp-haskell-set-liquid-on
+ lsp-mode
+ lsp-haskell-set-completion-snippets-on
+ lsp-haskell-set-hlint-on
 )
 
 ;; ----- smex-data -----
 (
- (load-theme . 50)
- (load-file . 104)
- (package-install . 54)
+ (load-theme . 79)
+ (load-file . 117)
+ (package-install . 67)
  (counsel-M-x . 2)
  (counsel-mode . 2)
- (package-refresh-contents . 26)
- (flycheck-mode . 10)
+ (package-refresh-contents . 30)
+ (flycheck-mode . 11)
  (all-the-icons-install-fonts . 1)
  (company-mode . 2)
  (linum-mode . 5)
@@ -31,7 +31,7 @@
  (package-autoremove . 5)
  (evil-goto-definition . 2)
  (find-function . 5)
- (package-delete . 9)
+ (package-delete . 10)
  (markdown-mode . 2)
  (revert-buffer . 72)
  (dired-ranger-copy . 9)
@@ -39,12 +39,12 @@
  (fold-this-regexp . 9)
  (tern-use-server . 14)
  (new-frame . 2)
- (company-complete . 1)
+ (company-complete . 2)
  (dired-ranger-bookmark . 5)
  (dired-ranger-bookmark-visit . 2)
  (tern-mode . 3)
  (fold-this . 12)
- (package-reinstall . 3)
+ (package-reinstall . 6)
  (fold-this-all . 2)
  (find-library . 1)
  (abort-recursive-edit . 1)
@@ -87,7 +87,7 @@
  (js-mode . 1)
  (display-buffer-other-frame . 1)
  (find-grep-dired . 3)
- (tide-restart-server . 35)
+ (tide-restart-server . 36)
  (magit-diff-buffer-file . 5)
  (profiler-start . 1)
  (profiler-report . 1)
@@ -107,7 +107,7 @@
  (tide-auto-compile-file . 2)
  (tide-fix . 2)
  (tide-goto-error . 1)
- (server-start . 1)
+ (server-start . 2)
  (eshell . 3)
  (tide-refactor . 1)
  (tide-hl-identifier-mode . 2)
@@ -176,4 +176,17 @@
  (sgml-pretty-print . 1)
  (magit-cherry . 1)
  (magit-checkout . 3)
+ (font-lock-mode . 2)
+ (font-lock-fontify-buffer . 1)
+ (json-mode . 1)
+ (compile . 1)
+ (recompile . 2)
+ (lsp-haskell-set-hlint-on . 2)
+ (lsp-haskell-set-completion-snippets-on . 2)
+ (company-lsp . 4)
+ (customize-group . 1)
+ (lsp-haskell-set-liquid-on . 2)
+ (lsp . 8)
+ (lsp-mode . 1)
+ (haskell-hoogle . 1)
 )
