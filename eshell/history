@@ -12,3 +12,20 @@ ls
 exit
 ls
 exit
+ls
+cd ../../
+ls
+yarn  build
+ls -al
+git status
+exit
+ls
+ls -al
+ls -al
+echo $PATH
+source ~/.zshrc 
+ls
+ls -al
+cat ~/.zshrc
+ls
+exit

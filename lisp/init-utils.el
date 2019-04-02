@@ -73,4 +73,32 @@
       (browse-url (concat "file://" file-name)))))
 
 
+;;----------------------------------------------------------------------------
+;; open iterm tab with current location
+;;----------------------------------------------------------------------------
+(defun iterm ()
+  "Open the current directory in iterm with new tab"
+  (interactive)
+  (call-process-shell-command "~/dev/bin/tab" nil nil nil (file-name-directory (buffer-file-name))))
+
+(defun swap-buffers-in-windows ()
+  "Put the buffer from the selected window in next window, and vice versa"
+  (interactive)
+  (let* ((this (selected-window))
+     (other (next-window))
+     (this-buffer (window-buffer this))
+     (other-buffer (window-buffer other)))
+    (set-window-buffer other this-buffer)
+    (set-window-buffer this other-buffer)
+    ))
+
+(defun copy-buffers-in-windows ()
+  "Put the buffer from the selected window in next window, and vice versa"
+  (interactive)
+  (let* ((this (selected-window))
+     (other (next-window))
+     (this-buffer (window-buffer this)))
+    (set-window-buffer other this-buffer)
+    ))
+
 (provide 'init-utils)

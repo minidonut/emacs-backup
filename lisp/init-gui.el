@@ -5,6 +5,5 @@
 ;;(set-face-attribute 'default nil :height 130)
 (set-frame-font "Menlo:pixelsize=12")
 (setq-default line-spacing 3)
-(global-linum-mode 1)
 
 (provide 'init-gui)
