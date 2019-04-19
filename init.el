@@ -23,6 +23,11 @@
 (global-hl-line-mode 1)
 (global-display-line-numbers-mode 1)
 
+;; Nope, I want my copies in the system temp dir.
+(setq flymake-run-in-place nil)
+;; This lets me say where my temp dir is.
+(setq temporary-file-directory "~/.emacs.d/tmp/")
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -322,8 +327,6 @@ Version 2018-02-21"
 ;;     (set-char-table-range composition-function-table (car char-regexp)
 ;;                           `([,(cdr char-regexp) 0 font-shape-gstring]))))
 
-
-
 (require 'web-mode)
 (require 'flycheck)
 ;;------------------------------------------------------------
@@ -431,10 +434,10 @@ Version 2018-02-21"
 (require 'lsp-haskell)
 (require 'company-lsp)
 (setq lsp-haskell-process-path-hie "/Users/minidonut/.local/bin/hie")
+(setq haskell-flymake-init nil)
 (push 'company-lsp company-backends)
 (add-hook 'haskell-mode-hook #'lsp)
 (add-hook 'haskell-mode-hook 'flycheck-mode)
-(add-hook 'haskell-mode-hook 'flymake-mode-off)
 (add-hook 'lsp-mode-hook 'lsp-ui-mode)
 
 
