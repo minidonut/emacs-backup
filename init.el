@@ -23,8 +23,6 @@
 (global-hl-line-mode 1)
 (global-display-line-numbers-mode 1)
 
-;; Nope, I want my copies in the system temp dir.
-(setq flymake-run-in-place nil)
 ;; This lets me say where my temp dir is.
 (setq temporary-file-directory "~/.emacs.d/tmp/")
 
@@ -41,7 +39,7 @@
  '(lsp-ui-sideline-enable nil)
  '(package-selected-packages
    (quote
-    (find-file-in-project drag-stuff nlinum-relative lsp-haskell lsp-ui company-lsp lsp-mode haskell-mode tide web-beautify ox-html5slide json-mode yaml-mode graphql-mode tabbar treemacs-projectile treemacs-evil treemacs magit js2-refactor evil-textobj-anyblock doom-modeline company-tern fold-this dired-ranger nyan-mode markdown-mode company editorconfig expand-region evil-surround ace-jump-mode rjsx-mode web-mode yasnippet evil golden-ratio beacon doom-themes counsel smex ivy ##))))
+    (flycheck-haskell find-file-in-project drag-stuff nlinum-relative lsp-haskell lsp-ui company-lsp lsp-mode haskell-mode tide web-beautify ox-html5slide json-mode yaml-mode graphql-mode tabbar treemacs-projectile treemacs-evil treemacs magit js2-refactor evil-textobj-anyblock doom-modeline company-tern fold-this dired-ranger nyan-mode markdown-mode company editorconfig expand-region evil-surround ace-jump-mode rjsx-mode web-mode yasnippet evil golden-ratio beacon doom-themes counsel smex ivy ##))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -80,6 +78,7 @@
 (global-set-key (kbd "<C-S-tab>") 'quit-window)            ;; return의 의미
 (global-set-key (kbd "s-w") 'kill-this-buffer)       ;; close의 의미
 (global-set-key (kbd "C-f") 'swiper)                 ;; swiper
+(global-set-key (kbd "C-s-f") 'counsel-rg)                 ;; swiper
 (global-set-key (kbd "C-b") 'counsel-ibuffer)       ;; switch to buffer
 (global-set-key (kbd "C-`") 'other-window)       ;; Switch window
 (global-set-key (kbd "C-~") 'copy-buffers-in-windows) ;; copy-buffers-in-windows
@@ -394,17 +393,15 @@ Version 2018-02-21"
 (electric-pair-mode 1)
 (put 'scroll-left 'disabled nil)
 
-;; Haskell Setting with LSP
-;; (require 'lsp-ui)
-;; (require 'lsp-mode)
-;; (require 'lsp-haskell)
-;; (require 'company-lsp)
-;; (setq lsp-haskell-process-path-hie "/Users/minidonut/.local/bin/hie")
-;; (setq haskell-flymake-init nil)
-;; (push 'company-lsp company-backends)
-;; (add-hook 'haskell-mode-hook #'lsp)
-;; (add-hook 'haskell-mode-hook 'flycheck-mode)
-;; (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+(add-hook 'haskell-mode-hook #'flycheck-haskell-setup)
+(add-hook 'haskell-mode-hook 'flycheck-mode)
+(require 'lsp-ui)
+(require 'lsp-mode)
+(require 'lsp-haskell)
+(require 'company-lsp)
+(setq lsp-haskell-process-path-hie "/Users/minidonut/.local/bin/hie")
+
+(add-hook 'lsp-mode-hook 'lsp-ui-mode)
 
 ;;https://stackoverflow.com/questions/18347968/how-to-open-emacs-gui-ide-from-mac-terminal
 (setq ns-pop-up-frames nil)

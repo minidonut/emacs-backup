@@ -1,26 +1,26 @@
 
 ;; ----- smex-history -----
 (
+ lsp-haskell-set-hlint-on
  load-file
+ flycheck-mode
+ company-mode
+ haskell-mode
+ haskell-interactive-mode
  package-delete
- describe-mode
- package-install
- package-refresh-contents
- browse-current-file
- flymake-mode
 )
 
 ;; ----- smex-data -----
 (
  (load-theme . 82)
- (load-file . 197)
- (package-install . 80)
+ (load-file . 203)
+ (package-install . 83)
  (counsel-M-x . 2)
  (counsel-mode . 2)
- (package-refresh-contents . 40)
- (flycheck-mode . 21)
+ (package-refresh-contents . 41)
+ (flycheck-mode . 22)
  (all-the-icons-install-fonts . 1)
- (company-mode . 4)
+ (company-mode . 6)
  (linum-mode . 14)
  (transparency . 16)
  (toggle-transparency . 2)
@@ -31,7 +31,7 @@
  (package-autoremove . 5)
  (evil-goto-definition . 2)
  (find-function . 5)
- (package-delete . 16)
+ (package-delete . 17)
  (markdown-mode . 2)
  (revert-buffer . 72)
  (dired-ranger-copy . 9)
@@ -108,7 +108,7 @@
  (tide-fix . 2)
  (tide-goto-error . 1)
  (server-start . 2)
- (eshell . 3)
+ (eshell . 4)
  (tide-refactor . 1)
  (tide-hl-identifier-mode . 3)
  (tide-organize-imports . 1)
@@ -181,7 +181,7 @@
  (json-mode . 1)
  (compile . 1)
  (recompile . 2)
- (lsp-haskell-set-hlint-on . 3)
+ (lsp-haskell-set-hlint-on . 4)
  (lsp-haskell-set-completion-snippets-on . 2)
  (company-lsp . 6)
  (customize-group . 3)
@@ -200,7 +200,7 @@
  (nlinum-relative-mode . 2)
  (haskell-menu . 1)
  (haskell-compilation-mode . 2)
- (haskell-mode . 3)
+ (haskell-mode . 4)
  (lsp-ui-doc-mode . 2)
  (lsp-ui-imenu-mode . 5)
  (lsp-ui-flycheck-list-mode . 3)
@@ -259,4 +259,5 @@
  (ivy-occur . 1)
  (magit-push . 1)
  (browse-current-file . 1)
+ (haskell-interactive-mode . 2)
 )

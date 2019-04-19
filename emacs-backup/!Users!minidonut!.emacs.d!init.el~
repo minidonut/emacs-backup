@@ -41,7 +41,7 @@
  '(lsp-ui-sideline-enable nil)
  '(package-selected-packages
    (quote
-    (find-file-in-project drag-stuff nlinum-relative lsp-haskell lsp-ui company-lsp lsp-mode haskell-mode tide web-beautify ox-html5slide json-mode yaml-mode graphql-mode tabbar treemacs-projectile treemacs-evil treemacs magit js2-refactor evil-textobj-anyblock doom-modeline company-tern fold-this dired-ranger nyan-mode markdown-mode company editorconfig expand-region evil-surround ace-jump-mode rjsx-mode web-mode yasnippet evil golden-ratio beacon doom-themes counsel smex ivy ##))))
+    (flycheck-haskell find-file-in-project drag-stuff nlinum-relative lsp-haskell lsp-ui company-lsp lsp-mode haskell-mode tide web-beautify ox-html5slide json-mode yaml-mode graphql-mode tabbar treemacs-projectile treemacs-evil treemacs magit js2-refactor evil-textobj-anyblock doom-modeline company-tern fold-this dired-ranger nyan-mode markdown-mode company editorconfig expand-region evil-surround ace-jump-mode rjsx-mode web-mode yasnippet evil golden-ratio beacon doom-themes counsel smex ivy ##))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -395,6 +395,11 @@ Version 2018-02-21"
 (put 'scroll-left 'disabled nil)
 
 ;; Haskell Setting with LSP
+(add-hook 'haskell-mode-hook
+          (lambda ()
+            (set (make-local-variable 'company-backends)
+                 (append '((company-capf company-dabbrev-code))
+                         company-backends))))
 ;; (require 'lsp-ui)
 ;; (require 'lsp-mode)
 ;; (require 'lsp-haskell)
@@ -406,17 +411,8 @@ Version 2018-02-21"
 ;; (add-hook 'haskell-mode-hook 'flycheck-mode)
 ;; (add-hook 'lsp-mode-hook 'lsp-ui-mode)
 
-
 ;;https://stackoverflow.com/questions/18347968/how-to-open-emacs-gui-ide-from-mac-terminal
 (setq ns-pop-up-frames nil)
-
-;;scroll laggy
-;;(setq redisplay-dont-pause t
-;;  scroll-margin 1
-;;  scroll-step 1
-;;  scroll-conservatively 10000
-;;  scroll-preserve-screen-position 1)
-
 
 (drag-stuff-global-mode 1)
 (drag-stuff-define-keys)

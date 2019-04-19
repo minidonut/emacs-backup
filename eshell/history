@@ -29,3 +29,21 @@ ls -al
 cat ~/.zshrc
 ls
 exit
+ls
+gs
+git status
+ls
+git status
+gs
+git status
+git add *
+gs
+git status
+git add .gitignore 
+gs
+git status
+git commit -m "save"
+gs
+gs
+git push origin master
+exit
