@@ -2,18 +2,18 @@
 ;; ----- smex-history -----
 (
  load-file
+ package-delete
  describe-mode
  package-install
  package-refresh-contents
  browse-current-file
- package-delete
  flymake-mode
 )
 
 ;; ----- smex-data -----
 (
  (load-theme . 82)
- (load-file . 196)
+ (load-file . 197)
  (package-install . 80)
  (counsel-M-x . 2)
  (counsel-mode . 2)
@@ -31,7 +31,7 @@
  (package-autoremove . 5)
  (evil-goto-definition . 2)
  (find-function . 5)
- (package-delete . 14)
+ (package-delete . 16)
  (markdown-mode . 2)
  (revert-buffer . 72)
  (dired-ranger-copy . 9)

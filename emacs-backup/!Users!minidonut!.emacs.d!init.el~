@@ -23,6 +23,11 @@
 (global-hl-line-mode 1)
 (global-display-line-numbers-mode 1)
 
+;; Nope, I want my copies in the system temp dir.
+(setq flymake-run-in-place nil)
+;; This lets me say where my temp dir is.
+(setq temporary-file-directory "~/.emacs.d/tmp/")
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -36,7 +41,7 @@
  '(lsp-ui-sideline-enable nil)
  '(package-selected-packages
    (quote
-    (buffer-move find-file-in-project drag-stuff evil-visual-mark-mode evil-goggles nlinum-relative lsp-haskell lsp-ui company-lsp lsp-mode haskell-mode tide web-beautify ox-html5slide json-mode yaml-mode graphql-mode tabbar treemacs-projectile treemacs-evil treemacs magit js2-refactor evil-textobj-anyblock doom-modeline company-tern fold-this dired-ranger nyan-mode markdown-mode company editorconfig expand-region evil-surround ace-jump-mode rjsx-mode web-mode yasnippet evil golden-ratio beacon doom-themes counsel smex ivy ##))))
+    (find-file-in-project drag-stuff nlinum-relative lsp-haskell lsp-ui company-lsp lsp-mode haskell-mode tide web-beautify ox-html5slide json-mode yaml-mode graphql-mode tabbar treemacs-projectile treemacs-evil treemacs magit js2-refactor evil-textobj-anyblock doom-modeline company-tern fold-this dired-ranger nyan-mode markdown-mode company editorconfig expand-region evil-surround ace-jump-mode rjsx-mode web-mode yasnippet evil golden-ratio beacon doom-themes counsel smex ivy ##))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -77,6 +82,7 @@
 (global-set-key (kbd "C-f") 'swiper)                 ;; swiper
 (global-set-key (kbd "C-b") 'counsel-ibuffer)       ;; switch to buffer
 (global-set-key (kbd "C-`") 'other-window)       ;; Switch window
+(global-set-key (kbd "C-~") 'copy-buffers-in-windows) ;; copy-buffers-in-windows
 (global-set-key (kbd "s-b") 'ibuffer)            ;; list buffer
 (global-set-key (kbd "s-r") 'shell-command)          ;; run command
 (global-set-key (kbd "M-r") 'query-replace)          ;; replace
@@ -96,6 +102,8 @@
                                 (other-window -1)))
 (define-key dired-mode-map (kbd "y") 'dired-ranger-copy)
 (define-key dired-mode-map (kbd "p") 'dired-ranger-paste)
+(global-set-key (kbd "s-<left>") 'move-beginning-of-line)
+(global-set-key (kbd "s-<right>") 'move-end-of-line)
 ;; 남는 키들, C-t (transpositng character), 
 ;; Global한 C-space로 바꿔야할듯 ;; 대신 한글 입력기가 매우 잘되있어서 이걸로 그냥 쓰는게 나을지도 모르겠다
 ;;-----------------------------------KBD end
@@ -285,42 +293,6 @@ Version 2018-02-21"
 
 (define-key ivy-minibuffer-map (kbd "C-f") 'bjm/ivy-yank-whole-word)
 
-;; Fira Code
-;; (when (window-system)
-;;  (set-frame-font "Fira Code"))
-
-;; (let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
-;;                (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
-;;                (36 . ".\\(?:>\\)")
-;;                (37 . ".\\(?:\\(?:%%\\)\\|%\\)")
-;;                (38 . ".\\(?:\\(?:&&\\)\\|&\\)")
-;;                (42 . ".\\(?:\\(?:\\*\\*/\\)\\|\\(?:\\*[*/]\\)\\|[*/>]\\)")
-;;                (43 . ".\\(?:\\(?:\\+\\+\\)\\|[+>]\\)")
-;;                (45 . ".\\(?:\\(?:-[>-]\\|<<\\|>>\\)\\|[<>}~-]\\)")
-;;                (46 . ".\\(?:\\(?:\\.[.<]\\)\\|[.=-]\\)")
-;;                (47 . ".\\(?:\\(?:\\*\\*\\|//\\|==\\)\\|[*/=>]\\)")
-;;                (48 . ".\\(?:x[a-zA-Z]\\)")
-;;                (58 . ".\\(?:::\\|[:=]\\)")
-;;                (59 . ".\\(?:;;\\|;\\)")
-;;                (60 . ".\\(?:\\(?:!--\\)\\|\\(?:~~\\|->\\|\\$>\\|\\*>\\|\\+>\\|--\\|<[<=-]\\|=[<=>]\\||>\\)\\|[*$+~/<=>|-]\\)")
-;;                (61 . ".\\(?:\\(?:/=\\|:=\\|<<\\|=[=>]\\|>>\\)\\|[<=>~]\\)")
-;;                (62 . ".\\(?:\\(?:=>\\|>[=>-]\\)\\|[=>-]\\)")
-;;                (63 . ".\\(?:\\(\\?\\?\\)\\|[:=?]\\)")
-;;                (91 . ".\\(?:]\\)")
-;;                (92 . ".\\(?:\\(?:\\\\\\\\\\)\\|\\\\\\)")
-;;                (94 . ".\\(?:=\\)")
-;;                (119 . ".\\(?:ww\\)")
-;;                (123 . ".\\(?:-\\)")
-;;                (124 . ".\\(?:\\(?:|[=|]\\)\\|[=>|]\\)")
-;;                (126 . ".\\(?:~>\\|~~\\|[>=@~-]\\)")
-;;                )
-;;              ))
-;;   (dolist (char-regexp alist)
-;;     (set-char-table-range composition-function-table (car char-regexp)
-;;                           `([,(cdr char-regexp) 0 font-shape-gstring]))))
-
-
-
 (require 'web-mode)
 (require 'flycheck)
 ;;------------------------------------------------------------
@@ -423,16 +395,16 @@ Version 2018-02-21"
 (put 'scroll-left 'disabled nil)
 
 ;; Haskell Setting with LSP
-(require 'lsp-ui)
-(require 'lsp-mode)
-(require 'lsp-haskell)
-(require 'company-lsp)
-(setq lsp-haskell-process-path-hie "/Users/minidonut/.local/bin/hie")
-(push 'company-lsp company-backends)
-(add-hook 'haskell-mode-hook #'lsp)
-(add-hook 'haskell-mode-hook 'flycheck-mode)
-(add-hook 'haskell-mode-hook 'flymake-mode-off)
-(add-hook 'lsp-mode-hook 'lsp-ui-mode)
+;; (require 'lsp-ui)
+;; (require 'lsp-mode)
+;; (require 'lsp-haskell)
+;; (require 'company-lsp)
+;; (setq lsp-haskell-process-path-hie "/Users/minidonut/.local/bin/hie")
+;; (setq haskell-flymake-init nil)
+;; (push 'company-lsp company-backends)
+;; (add-hook 'haskell-mode-hook #'lsp)
+;; (add-hook 'haskell-mode-hook 'flycheck-mode)
+;; (add-hook 'lsp-mode-hook 'lsp-ui-mode)
 
 
 ;;https://stackoverflow.com/questions/18347968/how-to-open-emacs-gui-ide-from-mac-terminal
@@ -445,9 +417,6 @@ Version 2018-02-21"
 ;;  scroll-conservatively 10000
 ;;  scroll-preserve-screen-position 1)
 
-;;evil plugin
-(evil-goggles-mode 1)
-(evil-visual-mark-mode 1)
 
 (drag-stuff-global-mode 1)
 (drag-stuff-define-keys)

@@ -41,7 +41,7 @@
  '(lsp-ui-sideline-enable nil)
  '(package-selected-packages
    (quote
-    (find-file-in-project drag-stuff evil-visual-mark-mode evil-goggles nlinum-relative lsp-haskell lsp-ui company-lsp lsp-mode haskell-mode tide web-beautify ox-html5slide json-mode yaml-mode graphql-mode tabbar treemacs-projectile treemacs-evil treemacs magit js2-refactor evil-textobj-anyblock doom-modeline company-tern fold-this dired-ranger nyan-mode markdown-mode company editorconfig expand-region evil-surround ace-jump-mode rjsx-mode web-mode yasnippet evil golden-ratio beacon doom-themes counsel smex ivy ##))))
+    (find-file-in-project drag-stuff nlinum-relative lsp-haskell lsp-ui company-lsp lsp-mode haskell-mode tide web-beautify ox-html5slide json-mode yaml-mode graphql-mode tabbar treemacs-projectile treemacs-evil treemacs magit js2-refactor evil-textobj-anyblock doom-modeline company-tern fold-this dired-ranger nyan-mode markdown-mode company editorconfig expand-region evil-surround ace-jump-mode rjsx-mode web-mode yasnippet evil golden-ratio beacon doom-themes counsel smex ivy ##))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -293,40 +293,6 @@ Version 2018-02-21"
 
 (define-key ivy-minibuffer-map (kbd "C-f") 'bjm/ivy-yank-whole-word)
 
-;; Fira Code
-;; (when (window-system)
-;;  (set-frame-font "Fira Code"))
-
-;; (let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
-;;                (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
-;;                (36 . ".\\(?:>\\)")
-;;                (37 . ".\\(?:\\(?:%%\\)\\|%\\)")
-;;                (38 . ".\\(?:\\(?:&&\\)\\|&\\)")
-;;                (42 . ".\\(?:\\(?:\\*\\*/\\)\\|\\(?:\\*[*/]\\)\\|[*/>]\\)")
-;;                (43 . ".\\(?:\\(?:\\+\\+\\)\\|[+>]\\)")
-;;                (45 . ".\\(?:\\(?:-[>-]\\|<<\\|>>\\)\\|[<>}~-]\\)")
-;;                (46 . ".\\(?:\\(?:\\.[.<]\\)\\|[.=-]\\)")
-;;                (47 . ".\\(?:\\(?:\\*\\*\\|//\\|==\\)\\|[*/=>]\\)")
-;;                (48 . ".\\(?:x[a-zA-Z]\\)")
-;;                (58 . ".\\(?:::\\|[:=]\\)")
-;;                (59 . ".\\(?:;;\\|;\\)")
-;;                (60 . ".\\(?:\\(?:!--\\)\\|\\(?:~~\\|->\\|\\$>\\|\\*>\\|\\+>\\|--\\|<[<=-]\\|=[<=>]\\||>\\)\\|[*$+~/<=>|-]\\)")
-;;                (61 . ".\\(?:\\(?:/=\\|:=\\|<<\\|=[=>]\\|>>\\)\\|[<=>~]\\)")
-;;                (62 . ".\\(?:\\(?:=>\\|>[=>-]\\)\\|[=>-]\\)")
-;;                (63 . ".\\(?:\\(\\?\\?\\)\\|[:=?]\\)")
-;;                (91 . ".\\(?:]\\)")
-;;                (92 . ".\\(?:\\(?:\\\\\\\\\\)\\|\\\\\\)")
-;;                (94 . ".\\(?:=\\)")
-;;                (119 . ".\\(?:ww\\)")
-;;                (123 . ".\\(?:-\\)")
-;;                (124 . ".\\(?:\\(?:|[=|]\\)\\|[=>|]\\)")
-;;                (126 . ".\\(?:~>\\|~~\\|[>=@~-]\\)")
-;;                )
-;;              ))
-;;   (dolist (char-regexp alist)
-;;     (set-char-table-range composition-function-table (car char-regexp)
-;;                           `([,(cdr char-regexp) 0 font-shape-gstring]))))
-
 (require 'web-mode)
 (require 'flycheck)
 ;;------------------------------------------------------------
@@ -429,31 +395,19 @@ Version 2018-02-21"
 (put 'scroll-left 'disabled nil)
 
 ;; Haskell Setting with LSP
-(require 'lsp-ui)
-(require 'lsp-mode)
-(require 'lsp-haskell)
-(require 'company-lsp)
-(setq lsp-haskell-process-path-hie "/Users/minidonut/.local/bin/hie")
-(setq haskell-flymake-init nil)
-(push 'company-lsp company-backends)
-(add-hook 'haskell-mode-hook #'lsp)
-(add-hook 'haskell-mode-hook 'flycheck-mode)
-(add-hook 'lsp-mode-hook 'lsp-ui-mode)
-
+;; (require 'lsp-ui)
+;; (require 'lsp-mode)
+;; (require 'lsp-haskell)
+;; (require 'company-lsp)
+;; (setq lsp-haskell-process-path-hie "/Users/minidonut/.local/bin/hie")
+;; (setq haskell-flymake-init nil)
+;; (push 'company-lsp company-backends)
+;; (add-hook 'haskell-mode-hook #'lsp)
+;; (add-hook 'haskell-mode-hook 'flycheck-mode)
+;; (add-hook 'lsp-mode-hook 'lsp-ui-mode)
 
 ;;https://stackoverflow.com/questions/18347968/how-to-open-emacs-gui-ide-from-mac-terminal
 (setq ns-pop-up-frames nil)
-
-;;scroll laggy
-;;(setq redisplay-dont-pause t
-;;  scroll-margin 1
-;;  scroll-step 1
-;;  scroll-conservatively 10000
-;;  scroll-preserve-screen-position 1)
-
-;;evil plugin
-(evil-goggles-mode 1)
-(evil-visual-mark-mode 1)
 
 (drag-stuff-global-mode 1)
 (drag-stuff-define-keys)
