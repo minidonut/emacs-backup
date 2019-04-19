@@ -399,7 +399,7 @@ Version 2018-02-21"
 (require 'lsp-mode)
 (require 'lsp-haskell)
 (require 'company-lsp)
-(setq lsp-haskell-process-path-hie "/Users/minidonut/.local/bin/hie")
+(setq lsp-haskell-process-path-hie "hie-wrapper")
 
 (add-hook 'lsp-mode-hook 'lsp-ui-mode)
 

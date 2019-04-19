@@ -47,3 +47,19 @@ gs
 gs
 git push origin master
 exit
+ls
+gs
+gs
+ga
+ga
+ga
+ga
+gs
+ga
+git add .gitignore 
+ls
+gs
+git commit -m "save"
+ls
+ls -al
+exit
