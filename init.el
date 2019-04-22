@@ -93,6 +93,7 @@
 (global-set-key (kbd "C-c l") 'goto-last-change)
 (global-set-key (kbd "C-c p") 'yas/expand)
 (global-set-key (kbd "C-SPC") 'company-complete)
+(global-set-key (kbd "S-SPC") 'toggle-input-method)
 (global-set-key (kbd "C-c r") 'tide-references)
 (global-set-key (kbd "C-c d") 'tide-jump-to-definition)
 (global-set-key (kbd "C-c \`")  'window-swap-states)
@@ -393,18 +394,23 @@ Version 2018-02-21"
 (electric-pair-mode 1)
 (put 'scroll-left 'disabled nil)
 
-(add-hook 'haskell-mode-hook #'flycheck-haskell-setup)
-(add-hook 'haskell-mode-hook 'flycheck-mode)
 (require 'lsp-ui)
 (require 'lsp-mode)
 (require 'lsp-haskell)
 (require 'company-lsp)
+(require 'haskell-interactive-mode)
+(require 'haskell-process)
 (setq lsp-haskell-process-path-hie "hie-wrapper")
-
+(setq haskell-interactive-popup-errors nil)
+(add-hook 'haskell-mode-hook #'flycheck-haskell-setup)
+(add-hook 'haskell-mode-hook 'flycheck-mode)
+(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+(define-key haskell-mode-map (kbd "<C-return>") 'haskell-process-load-file)
 
 ;;https://stackoverflow.com/questions/18347968/how-to-open-emacs-gui-ide-from-mac-terminal
 (setq ns-pop-up-frames nil)
 
 (drag-stuff-global-mode 1)
 (drag-stuff-define-keys)
+
