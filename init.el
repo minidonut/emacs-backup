@@ -24,7 +24,7 @@
 (global-display-line-numbers-mode 1)
 
 ;; This lets me say where my temp dir is.
-(setq temporary-file-directory "~/.emacs.d/tmp/")
+(setq temporary-file-directory "~/.emacs.d/tmp")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -34,12 +34,14 @@
  '(counsel-mode t)
  '(custom-safe-themes
    (quote
-    ("7846b7ea129e7fc626aa5d1787b0d1168668ea38b796177f4107496ac5c7e51d" "50a1962fe2e32885c3f7b3a25e6ded59dbb6a3ea677782e84593c78f38cd5237" "2c345b7952807a666dcf6d8523266ee10e56bcc44053a53566233d0fe41d29d0" "0acb13488bdb48c106ca4faf3dab289d605be158c1556c49872ff94f4e1d47dd" "0096e8605736587219e09abc09295291ba9d0b94c465fcb9fa052e79318f1405" "98632fdeb0464d0e6b944ba351f909a7b09d721931ed75b1291d3a7bd8231420" "178b79ad5235063129474ed114c3bc15238be2576192d45bf7276f33421c87a6" "ab3de490daf360c55f9448229b641fe4fe5581cdad48de741a466656213f41fb" "9da44f1fdba9fd170c2a372f3048d89b581ac4aadfe14fd416934cc2a979d3d6" "184d7705291f8c0689fdeacbbecbd03ed8bfaf591f33bd471ca0764138b1db81" "1567bb8eba71854b24649e93a5d3591c793d3f0d8b58abf86be3b0fb1fb30128" "8aca557e9a17174d8f847fb02870cb2bb67f3b6e808e46c0e54a44e3e18e1020" "becc1fa64b79e5019cbd661efe74985d6b435e88d3fda72c5faf5b2992b742ee" "69e75ffca6acc27b0d4db9fabe224988b4ad219ea1c06192cf0d132d014383b8" "7e78a1030293619094ea6ae80a7579a562068087080e01c2b8b503b27900165c" "b35a14c7d94c1f411890d45edfb9dc1bd61c5becd5c326790b51df6ebf60f402" "93a0885d5f46d2aeac12bf6be1754faa7d5e28b27926b8aa812840fe7d0b7983" "75d3dde259ce79660bac8e9e237b55674b910b470f313cdf4b019230d01a982a" "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "ecba61c2239fbef776a72b65295b88e5534e458dfe3e6d7d9f9cb353448a569e" "cd736a63aa586be066d5a1f0e51179239fe70e16a9f18991f6f5d99732cabb32" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "6b289bab28a7e511f9c54496be647dc60f5bd8f9917c9495978762b99d8c96a0" "b54826e5d9978d59f9e0a169bbd4739dd927eead3ef65f56786621b53c031a7c" "fe666e5ac37c2dfcf80074e88b9252c71a22b6f5d2f566df9a7aa4f9bea55ef8" "356e5cbe0874b444263f3e1f9fffd4ae4c82c1b07fe085ba26e2a6d332db34dd" default)))
+    ("6d589ac0e52375d311afaa745205abb6ccb3b21f6ba037104d71111e7e76a3fc" "10461a3c8ca61c52dfbbdedd974319b7f7fd720b091996481c8fb1dded6c6116" "0daf22a3438a9c0998c777a771f23435c12a1d8844969a28f75820dd71ff64e1" "5057614f7e14de98bbc02200e2fe827ad897696bfd222d1bcab42ad8ff313e20" "54f2d1fcc9bcadedd50398697618f7c34aceb9966a6cbaa99829eb64c0c1f3ca" "7846b7ea129e7fc626aa5d1787b0d1168668ea38b796177f4107496ac5c7e51d" "50a1962fe2e32885c3f7b3a25e6ded59dbb6a3ea677782e84593c78f38cd5237" "2c345b7952807a666dcf6d8523266ee10e56bcc44053a53566233d0fe41d29d0" "0acb13488bdb48c106ca4faf3dab289d605be158c1556c49872ff94f4e1d47dd" "0096e8605736587219e09abc09295291ba9d0b94c465fcb9fa052e79318f1405" "98632fdeb0464d0e6b944ba351f909a7b09d721931ed75b1291d3a7bd8231420" "178b79ad5235063129474ed114c3bc15238be2576192d45bf7276f33421c87a6" "ab3de490daf360c55f9448229b641fe4fe5581cdad48de741a466656213f41fb" "9da44f1fdba9fd170c2a372f3048d89b581ac4aadfe14fd416934cc2a979d3d6" "184d7705291f8c0689fdeacbbecbd03ed8bfaf591f33bd471ca0764138b1db81" "1567bb8eba71854b24649e93a5d3591c793d3f0d8b58abf86be3b0fb1fb30128" "8aca557e9a17174d8f847fb02870cb2bb67f3b6e808e46c0e54a44e3e18e1020" "becc1fa64b79e5019cbd661efe74985d6b435e88d3fda72c5faf5b2992b742ee" "69e75ffca6acc27b0d4db9fabe224988b4ad219ea1c06192cf0d132d014383b8" "7e78a1030293619094ea6ae80a7579a562068087080e01c2b8b503b27900165c" "b35a14c7d94c1f411890d45edfb9dc1bd61c5becd5c326790b51df6ebf60f402" "93a0885d5f46d2aeac12bf6be1754faa7d5e28b27926b8aa812840fe7d0b7983" "75d3dde259ce79660bac8e9e237b55674b910b470f313cdf4b019230d01a982a" "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "ecba61c2239fbef776a72b65295b88e5534e458dfe3e6d7d9f9cb353448a569e" "cd736a63aa586be066d5a1f0e51179239fe70e16a9f18991f6f5d99732cabb32" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "6b289bab28a7e511f9c54496be647dc60f5bd8f9917c9495978762b99d8c96a0" "b54826e5d9978d59f9e0a169bbd4739dd927eead3ef65f56786621b53c031a7c" "fe666e5ac37c2dfcf80074e88b9252c71a22b6f5d2f566df9a7aa4f9bea55ef8" "356e5cbe0874b444263f3e1f9fffd4ae4c82c1b07fe085ba26e2a6d332db34dd" default)))
+ '(default-input-method "korean-hangul")
+ '(golden-ratio-mode t)
  '(lsp-ui-doc-enable nil)
  '(lsp-ui-sideline-enable nil)
  '(package-selected-packages
    (quote
-    (flycheck-haskell find-file-in-project drag-stuff nlinum-relative lsp-haskell lsp-ui company-lsp lsp-mode haskell-mode tide web-beautify ox-html5slide json-mode yaml-mode graphql-mode tabbar treemacs-projectile treemacs-evil treemacs magit js2-refactor evil-textobj-anyblock doom-modeline company-tern fold-this dired-ranger nyan-mode markdown-mode company editorconfig expand-region evil-surround ace-jump-mode rjsx-mode web-mode yasnippet evil golden-ratio beacon doom-themes counsel smex ivy ##))))
+    (exec-path-from-shell transpose-mark github-modern-theme github-theme zenburn-theme flycheck-haskell find-file-in-project drag-stuff nlinum-relative lsp-haskell lsp-ui company-lsp lsp-mode haskell-mode tide web-beautify ox-html5slide json-mode yaml-mode graphql-mode tabbar treemacs-projectile treemacs-evil treemacs magit js2-refactor evil-textobj-anyblock doom-modeline company-tern fold-this dired-ranger nyan-mode markdown-mode company editorconfig expand-region evil-surround ace-jump-mode rjsx-mode web-mode yasnippet evil golden-ratio beacon doom-themes counsel smex ivy ##))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -47,7 +49,6 @@
  ;; If there is more than one, they won't work right.
  )
 
-(golden-ratio-mode 1)
 ;; Global settings (defaults)
 (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
       doom-themes-enable-italic t) ; if nil, italics is universally disabled
@@ -76,9 +77,9 @@
 (global-set-key (kbd "C-p") 'find-file-in-project)    ;; find file in project
 (global-set-key (kbd "C-s") 'save-buffer)            ;; save
 (global-set-key (kbd "<C-S-tab>") 'quit-window)            ;; return의 의미
-(global-set-key (kbd "s-w") 'kill-this-buffer)       ;; close의 의미
-(global-set-key (kbd "C-f") 'swiper)                 ;; swiper
-(global-set-key (kbd "C-s-f") 'counsel-rg)                 ;; swiper
+(global-set-key (kbd "s-w") 'kill-buffer-and-return-previous)       ;; close의 의미
+(global-set-key (kbd "s-f") 'swiper)                 ;; swiper
+(global-set-key (kbd "s-F") 'counsel-rg)                 ;; swiper
 (global-set-key (kbd "C-b") 'counsel-ibuffer)       ;; switch to buffer
 (global-set-key (kbd "C-`") 'other-window)       ;; Switch window
 (global-set-key (kbd "C-~") 'copy-buffers-in-windows) ;; copy-buffers-in-windows
@@ -97,6 +98,7 @@
 (global-set-key (kbd "C-c r") 'tide-references)
 (global-set-key (kbd "C-c d") 'tide-jump-to-definition)
 (global-set-key (kbd "C-c \`")  'window-swap-states)
+(global-set-key (kbd "s-t")  'new-empty-buffer)
 (global-set-key (kbd "C-\\") (lambda ()
                                 (interactive)
                                 (other-window -1)))
@@ -132,6 +134,10 @@
 (editorconfig-mode 1)
 ;;Company mode
 (add-hook 'after-init-hook 'global-company-mode)
+(setq company-idle-delay 0)
+(setq company-minimum-prefix-length 1)
+(setq company-selection-wrap-around t)
+
 ;;Magit settings
 (global-set-key (kbd "C-x g") 'magit-status)
 ;; Recent mode
@@ -291,7 +297,7 @@ Version 2018-02-21"
       (insert (replace-regexp-in-string "  +" " " amend)))))
 ;; bind it to M-j
 
-(define-key ivy-minibuffer-map (kbd "C-f") 'bjm/ivy-yank-whole-word)
+(define-key ivy-minibuffer-map (kbd "s-f") 'bjm/ivy-yank-whole-word)
 
 (require 'web-mode)
 (require 'flycheck)
@@ -414,3 +420,8 @@ Version 2018-02-21"
 (drag-stuff-global-mode 1)
 (drag-stuff-define-keys)
 
+(setq inferior-lisp-program "sbcl")
+(add-to-list 'load-path (expand-file-name  "~/.emacs.d/slime")) 
+;; Load SLIME 
+(require 'slime) 
+(slime-setup '(slime-repl  slime-fancy  slime-banner)) 

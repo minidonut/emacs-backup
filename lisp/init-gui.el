@@ -3,7 +3,11 @@
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 ;;(set-face-attribute 'default nil :height 130)
-(set-frame-font "Menlo:pixelsize=12")
+(set-frame-font "Menlo:pixelsize=14")
 (setq-default line-spacing 3)
+
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 2)
+(setq indent-line-function 'insert-tab)
 
 (provide 'init-gui)

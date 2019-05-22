@@ -44,4 +44,10 @@
     (push-mark (+ left 1))
     (setq mark-active t))))
 
+(defun _sum (a b)
+  (interactive
+   (list
+    (read-number "First num: ")
+    (read-number "Second num: ")))
+  (message (+ a b)))
       
