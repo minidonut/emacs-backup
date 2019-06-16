@@ -122,3 +122,21 @@
     (switch-to-buffer -buf)
     (funcall initial-major-mode)
     (setq buffer-offer-save t)))
+
+(defun jump-to-cursor ()
+  "Jump to the position under the mouse cursor if possible."
+  (interactive)
+  (set-mouse-absolute-pixel-position (car (window-absolute-pixel-position)) (cdr (window-absolute-pixel-position))))
+
+
+  
+  ;; (when-let ((cursor-pos (mouse-position))
+  ;;        (line (cddr cursor-pos))
+  ;;        (col  (cadr cursor-pos))
+  ;;        (p (save-excursion
+  ;;         (goto-char (window-start))
+  ;;         (forward-line line)
+  ;;         (if (> (- (line-end-position) (line-beginning-position)) col)
+  ;;             (progn  (move-to-column col) (1- (point)))
+  ;;           nil))))
+  ;;   (goto-char p)))

@@ -1,6 +1,6 @@
 # -*- mode: snippet; require-final-newline: nil -*-
 # name: import
-# key: i
+# key: imp
 # group: es6
 # --
-import $0
+import {} from "$0";

@@ -111,7 +111,7 @@ determine the exact padding."
 
    (evil-goggles-default-face :inherit 'region :background (doom-blend region bg 0.5))
 
-   ((line-number &override) :foreground base4)
+   ((line-number &override) :foreground base7)
    ((line-number-current-line &override) :foreground fg)
 
    (font-lock-comment-face
