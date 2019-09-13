@@ -7,6 +7,7 @@
 (require 'init-utils)
 (require 'init-gui)
 
+
 (package-initialize)
 (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
 (add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
@@ -37,7 +38,7 @@
  '(counsel-mode t)
  '(custom-safe-themes
    (quote
-    ("d1b4990bd599f5e2186c3f75769a2c5334063e9e541e37514942c27975700370" "c33ddd126237bf6e67b4f8bd1673ac4625c3095e5e7cacddb8a9ecfccecd30d6" "690d58f5a460a44a66c20ff1934caa7030c6bc584609754c743bd70132ba7735" "6d589ac0e52375d311afaa745205abb6ccb3b21f6ba037104d71111e7e76a3fc" "10461a3c8ca61c52dfbbdedd974319b7f7fd720b091996481c8fb1dded6c6116" "0daf22a3438a9c0998c777a771f23435c12a1d8844969a28f75820dd71ff64e1" "5057614f7e14de98bbc02200e2fe827ad897696bfd222d1bcab42ad8ff313e20" "54f2d1fcc9bcadedd50398697618f7c34aceb9966a6cbaa99829eb64c0c1f3ca" "7846b7ea129e7fc626aa5d1787b0d1168668ea38b796177f4107496ac5c7e51d" "50a1962fe2e32885c3f7b3a25e6ded59dbb6a3ea677782e84593c78f38cd5237" "2c345b7952807a666dcf6d8523266ee10e56bcc44053a53566233d0fe41d29d0" "0acb13488bdb48c106ca4faf3dab289d605be158c1556c49872ff94f4e1d47dd" "0096e8605736587219e09abc09295291ba9d0b94c465fcb9fa052e79318f1405" "98632fdeb0464d0e6b944ba351f909a7b09d721931ed75b1291d3a7bd8231420" "178b79ad5235063129474ed114c3bc15238be2576192d45bf7276f33421c87a6" "ab3de490daf360c55f9448229b641fe4fe5581cdad48de741a466656213f41fb" "9da44f1fdba9fd170c2a372f3048d89b581ac4aadfe14fd416934cc2a979d3d6" "184d7705291f8c0689fdeacbbecbd03ed8bfaf591f33bd471ca0764138b1db81" "1567bb8eba71854b24649e93a5d3591c793d3f0d8b58abf86be3b0fb1fb30128" "8aca557e9a17174d8f847fb02870cb2bb67f3b6e808e46c0e54a44e3e18e1020" "becc1fa64b79e5019cbd661efe74985d6b435e88d3fda72c5faf5b2992b742ee" "69e75ffca6acc27b0d4db9fabe224988b4ad219ea1c06192cf0d132d014383b8" "7e78a1030293619094ea6ae80a7579a562068087080e01c2b8b503b27900165c" "b35a14c7d94c1f411890d45edfb9dc1bd61c5becd5c326790b51df6ebf60f402" "93a0885d5f46d2aeac12bf6be1754faa7d5e28b27926b8aa812840fe7d0b7983" "75d3dde259ce79660bac8e9e237b55674b910b470f313cdf4b019230d01a982a" "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "ecba61c2239fbef776a72b65295b88e5534e458dfe3e6d7d9f9cb353448a569e" "cd736a63aa586be066d5a1f0e51179239fe70e16a9f18991f6f5d99732cabb32" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "6b289bab28a7e511f9c54496be647dc60f5bd8f9917c9495978762b99d8c96a0" "b54826e5d9978d59f9e0a169bbd4739dd927eead3ef65f56786621b53c031a7c" "fe666e5ac37c2dfcf80074e88b9252c71a22b6f5d2f566df9a7aa4f9bea55ef8" "356e5cbe0874b444263f3e1f9fffd4ae4c82c1b07fe085ba26e2a6d332db34dd" default)))
+    ("f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" "100e7c5956d7bb3fd0eebff57fde6de8f3b9fafa056a2519f169f85199cc1c96" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "c9ac7fbb383cb55d432400a66ff835d55e66233bd710a03f70a3995afa5f1eff" "03f1feb6c54ebaeba060dee48ed0b9ec228bfa84ec441f244e5e923e9adea342" "d1b4990bd599f5e2186c3f75769a2c5334063e9e541e37514942c27975700370" "c33ddd126237bf6e67b4f8bd1673ac4625c3095e5e7cacddb8a9ecfccecd30d6" "690d58f5a460a44a66c20ff1934caa7030c6bc584609754c743bd70132ba7735" "6d589ac0e52375d311afaa745205abb6ccb3b21f6ba037104d71111e7e76a3fc" "10461a3c8ca61c52dfbbdedd974319b7f7fd720b091996481c8fb1dded6c6116" "0daf22a3438a9c0998c777a771f23435c12a1d8844969a28f75820dd71ff64e1" "5057614f7e14de98bbc02200e2fe827ad897696bfd222d1bcab42ad8ff313e20" "54f2d1fcc9bcadedd50398697618f7c34aceb9966a6cbaa99829eb64c0c1f3ca" "7846b7ea129e7fc626aa5d1787b0d1168668ea38b796177f4107496ac5c7e51d" "50a1962fe2e32885c3f7b3a25e6ded59dbb6a3ea677782e84593c78f38cd5237" "2c345b7952807a666dcf6d8523266ee10e56bcc44053a53566233d0fe41d29d0" "0acb13488bdb48c106ca4faf3dab289d605be158c1556c49872ff94f4e1d47dd" "0096e8605736587219e09abc09295291ba9d0b94c465fcb9fa052e79318f1405" "98632fdeb0464d0e6b944ba351f909a7b09d721931ed75b1291d3a7bd8231420" "178b79ad5235063129474ed114c3bc15238be2576192d45bf7276f33421c87a6" "ab3de490daf360c55f9448229b641fe4fe5581cdad48de741a466656213f41fb" "9da44f1fdba9fd170c2a372f3048d89b581ac4aadfe14fd416934cc2a979d3d6" "184d7705291f8c0689fdeacbbecbd03ed8bfaf591f33bd471ca0764138b1db81" "1567bb8eba71854b24649e93a5d3591c793d3f0d8b58abf86be3b0fb1fb30128" "8aca557e9a17174d8f847fb02870cb2bb67f3b6e808e46c0e54a44e3e18e1020" "becc1fa64b79e5019cbd661efe74985d6b435e88d3fda72c5faf5b2992b742ee" "69e75ffca6acc27b0d4db9fabe224988b4ad219ea1c06192cf0d132d014383b8" "7e78a1030293619094ea6ae80a7579a562068087080e01c2b8b503b27900165c" "b35a14c7d94c1f411890d45edfb9dc1bd61c5becd5c326790b51df6ebf60f402" "93a0885d5f46d2aeac12bf6be1754faa7d5e28b27926b8aa812840fe7d0b7983" "75d3dde259ce79660bac8e9e237b55674b910b470f313cdf4b019230d01a982a" "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "ecba61c2239fbef776a72b65295b88e5534e458dfe3e6d7d9f9cb353448a569e" "cd736a63aa586be066d5a1f0e51179239fe70e16a9f18991f6f5d99732cabb32" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "6b289bab28a7e511f9c54496be647dc60f5bd8f9917c9495978762b99d8c96a0" "b54826e5d9978d59f9e0a169bbd4739dd927eead3ef65f56786621b53c031a7c" "fe666e5ac37c2dfcf80074e88b9252c71a22b6f5d2f566df9a7aa4f9bea55ef8" "356e5cbe0874b444263f3e1f9fffd4ae4c82c1b07fe085ba26e2a6d332db34dd" default)))
  '(default-input-method "korean-hangul")
  '(fci-rule-color "#5c5e5e")
  '(golden-ratio-mode t)
@@ -48,7 +49,8 @@
  '(lsp-ui-sideline-enable nil)
  '(package-selected-packages
    (quote
-    (inf-clojure cider clojure-mode exec-path-from-shell transpose-mark github-modern-theme github-theme zenburn-theme flycheck-haskell find-file-in-project drag-stuff nlinum-relative lsp-haskell lsp-ui company-lsp lsp-mode haskell-mode tide web-beautify ox-html5slide json-mode yaml-mode graphql-mode tabbar treemacs-projectile treemacs-evil treemacs magit js2-refactor evil-textobj-anyblock doom-modeline company-tern fold-this dired-ranger nyan-mode markdown-mode company editorconfig expand-region evil-surround ace-jump-mode rjsx-mode web-mode yasnippet evil golden-ratio beacon doom-themes counsel smex ivy ##)))
+    (company-terraform terraform-mode inf-clojure cider clojure-mode exec-path-from-shell transpose-mark github-modern-theme github-theme zenburn-theme flycheck-haskell find-file-in-project drag-stuff nlinum-relative lsp-haskell lsp-ui company-lsp lsp-mode haskell-mode tide web-beautify ox-html5slide json-mode yaml-mode graphql-mode tabbar treemacs-projectile treemacs-evil treemacs magit js2-refactor evil-textobj-anyblock doom-modeline company-tern fold-this dired-ranger nyan-mode markdown-mode company editorconfig expand-region evil-surround ace-jump-mode rjsx-mode web-mode yasnippet evil golden-ratio beacon doom-themes counsel smex ivy ##)))
+ '(tabbar-separator (quote (0.5)))
  '(vc-annotate-background "#2B2D36")
  '(vc-annotate-color-map
    (list
@@ -100,12 +102,11 @@
 ;;------------------------------------CUSTOM Set Key
 ;; 계속 한글 입력기로 바뀌던게 이녀석이었는데... shift-space,
 (global-set-key (kbd "C-0") 'abort-recursive-edit)               ;; Execute
+(global-set-key (kbd "s-P") 'counsel-M-x)               ;; Execute
 (global-set-key (kbd "C-e") 'counsel-M-x)               ;; Execute
-(global-set-key (kbd "M-x") 'counsel-M-x)               ;; Execute
 (global-set-key (kbd "C-n") 'find-file)              ;; new buffer
 (global-set-key (kbd "s-p") 'find-file-in-project)    ;; find file in project
 (global-set-key (kbd "C-s") 'save-buffer)            ;; save
-(global-set-key (kbd "<C-S-tab>") 'quit-window)            ;; return의 의미
 (global-set-key (kbd "s-w") 'kill-buffer-and-return-previous)       ;; close의 의미
 (global-set-key (kbd "s-f") 'swiper)                 ;; swiper
 (global-set-key (kbd "s-F") 'counsel-rg)                 ;; swiper
@@ -115,7 +116,6 @@
 (global-set-key (kbd "s-b") 'ibuffer)            ;; list buffer
 (global-set-key (kbd "s-r") 'shell-command)          ;; run command
 (global-set-key (kbd "M-r") 'query-replace)          ;; replace
-(global-set-key (kbd "<C-tab>") 'previous-buffer)        ;; C-r and C-t 
 (global-set-key (kbd "s-[") 'er/contract-region)        ;; expand region plugin
 (global-set-key (kbd "s-]") 'er/expand-region)        ;; expand region plugin
 (global-set-key (kbd "s-/") 'comment-line)        ;; comment
@@ -355,7 +355,7 @@ Version 2018-02-21"
 (add-hook 'before-save-hook 'tide-format-before-save)
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
-;; (add-to-list 'auto-mode-alist '("\\.ts\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . web-mode))
 (add-hook 'web-mode-hook
           (lambda ()
             (when (string-equal "tsx" (file-name-extension buffer-file-name))
@@ -420,15 +420,6 @@ Version 2018-02-21"
 (define-key web-mode-map (kbd "C-c C-d") 'web-mode-attribute-kill)
 (define-key web-mode-map (kbd "C-c f") 'fold-active-region)
 
-
-;; TABbar mode configure
-(tabbar-mode 1)
-(define-key global-map (kbd "s-{") 'tabbar-backward-tab)
-(define-key global-map (kbd "s-}") 'tabbar-forward-tab)
-(define-key global-map (kbd "C-s-{") 'tabbar-backward-group)
-(define-key global-map (kbd "C-s-}") 'tabbar-forward-group)
-
-
 ;; SmartParen
 (electric-pair-mode 1)
 (put 'scroll-left 'disabled nil)
@@ -465,3 +456,65 @@ Version 2018-02-21"
 ;; Load SLIME 
 (require 'slime) 
 (slime-setup '(slime-repl  slime-fancy  slime-banner)) 
+
+
+;; tabbar mode
+(tabbar-mode 1)
+(set-face-attribute
+  'tabbar-unselected nil
+  :foreground "gray50")
+
+
+;; TABbar mode configure
+(define-key global-map (kbd "s-{") 'tabbar-backward-tab)
+(define-key global-map (kbd "s-}") 'tabbar-forward-tab)
+(global-set-key (kbd "<C-tab>") 'tabbar-forward-group)        ;; C-r and C-t 
+(global-set-key (kbd "<C-S-tab>") 'tabbar-backward-group)            ;; return의 의미
+
+(defun tabbar-buffer-groups ()
+  "Returns the list of group names the current buffer belongs to."
+  (list
+   (cond
+    ((memq major-mode
+        '(dired-mode))
+    "Dired")
+    ((memq major-mode
+        '(typescript-mode rjsx-mode web-mode json-mode))
+    "TS-mode")
+
+    ;; ADD RULES TO SPLIT BUFFERS IN GROUPS HERE!
+
+    ;; if buffer is not grouped by the rules you would add above 
+    ;; put it in the "General" group:
+    (t
+       "General"
+     ))))
+(remove-hook 'kill-buffer-hook 'tabbar-buffer-kill-buffer-hook)
+
+;; (define-key global-map (kbd "C-s-{") 'tabbar-backward-group)
+;; (define-key global-map (kbd "C-s-}") 'tabbar-forward-group)
+;; (global-set-key (kbd "<C-tab>") 'previous-buffer)        ;; C-r and C-t 
+;; (global-set-key (kbd "<C-S-tab>") 'quit-window)            ;; return의 의미
+
+;; if the full path of current file is under SUBPROJECT1 or SUBPROJECT2
+;; OR if I'm reading my personal issue track document,
+(defun ffip-setup ()
+  (interactive)
+    ;; well, I'm not interested in concatenated BIG js file or file in dist/
+    (setq-local ffip-find-options "-not -size +64k -not -iwholename '*/dist/*'")
+    ;; for this project, I'm only interested certain types of files
+    (setq-local ffip-ignore-filenames '("*.bmp" "*.jpg" "package-lock.json" "yarn.lock"))
+    ;; exclude `coverage/' directory
+    (add-to-list 'ffip-prune-patterns "*/coverage")
+    ;; exclude `build/' directory
+    (add-to-list 'ffip-prune-patterns "*/build")
+    ;; exclude `.next/' directory
+    (add-to-list 'ffip-prune-patterns "*/.next")
+    ;; exclude `dist/' directory
+    (add-to-list 'ffip-prune-patterns "*/dist"))
+  ;; insert more WHEN statements below this line for other projects
+  
+;; terraform-mode
+(require 'company-terraform)
+(require 'mido-mode)
+(company-terraform-init)

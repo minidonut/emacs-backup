@@ -166,6 +166,8 @@ determine the exact padding."
    (org-hide :foreground hidden)
    (solaire-org-hide-face :foreground hidden))
 
+  ;;
+
 
   ;; --- extra variables ---------------------
   ;; ()

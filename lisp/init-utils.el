@@ -123,6 +123,10 @@
     (funcall initial-major-mode)
     (setq buffer-offer-save t)))
 
+
+;;----------------------------------------------------------------------------
+;; Jump mouse cursor to current pointer location
+;;----------------------------------------------------------------------------
 (defun jump-to-cursor ()
   "Jump to the position under the mouse cursor if possible."
   (interactive)
